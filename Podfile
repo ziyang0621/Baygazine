@@ -8,6 +8,8 @@ pod 'KVNProgress'
 
 pod 'AFNetworking'
 
-pod 'Realm'
+use_frameworks!
+
+pod 'RealmSwift'
 
 end

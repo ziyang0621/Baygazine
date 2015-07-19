@@ -1,0 +1,6 @@
+framework module Pods_Baygazine {
+  umbrella header "Pods-Baygazine-umbrella.h"
+
+  export *
+  module * { export * }
+}

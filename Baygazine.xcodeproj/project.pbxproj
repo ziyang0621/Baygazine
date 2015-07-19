@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36822E0711ABEB28BA436630 /* Pods_Baygazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66A2766D4FEFF8076211B07 /* Pods_Baygazine.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774041B5B40C7002CEB0E /* AppDelegate.swift */; };
 		85E774071B5B40C7002CEB0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774061B5B40C7002CEB0E /* ViewController.swift */; };
 		85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E774081B5B40C7002CEB0E /* Main.storyboard */; };
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
 		85E7740F1B5B40C7002CEB0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740D1B5B40C7002CEB0E /* LaunchScreen.xib */; };
 		85E7741B1B5B40C7002CEB0E /* BaygazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7741A1B5B40C7002CEB0E /* BaygazineTests.swift */; };
-		F334CB436FE078CBD1BF06EE /* libPods-Baygazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		85E774191B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E7741A1B5B40C7002CEB0E /* BaygazineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaygazineTests.swift; sourceTree = "<group>"; };
 		8A0877D20C8F0CB4F813CCA2 /* Pods-Baygazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baygazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine.release.xcconfig"; sourceTree = "<group>"; };
-		A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Baygazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F66A2766D4FEFF8076211B07 /* Pods_Baygazine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baygazine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F334CB436FE078CBD1BF06EE /* libPods-Baygazine.a in Frameworks */,
+				36822E0711ABEB28BA436630 /* Pods_Baygazine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +131,7 @@
 		B3D662FAC1812C0AF07EF20A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */,
+				F66A2766D4FEFF8076211B07 /* Pods_Baygazine.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,6 +148,7 @@
 				85E773FC1B5B40C7002CEB0E /* Frameworks */,
 				85E773FD1B5B40C7002CEB0E /* Resources */,
 				9EFF1D3CDE487CB6AB83834D /* Copy Pods Resources */,
+				AF6BFCB2B2F54A06CFF89724 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,6 +248,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF6BFCB2B2F54A06CFF89724 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E2820F74CAC612F582186B3F /* Check Pods Manifest.lock */ = {
