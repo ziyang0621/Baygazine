@@ -13,6 +13,7 @@
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
 		85E7740F1B5B40C7002CEB0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740D1B5B40C7002CEB0E /* LaunchScreen.xib */; };
 		85E7741B1B5B40C7002CEB0E /* BaygazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7741A1B5B40C7002CEB0E /* BaygazineTests.swift */; };
+		F334CB436FE078CBD1BF06EE /* libPods-Baygazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A59A422B96A2F047B8F1A18 /* Pods-Baygazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baygazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine.debug.xcconfig"; sourceTree = "<group>"; };
 		85E773FF1B5B40C7002CEB0E /* Baygazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baygazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774031B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E774041B5B40C7002CEB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		85E774141B5B40C7002CEB0E /* BaygazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaygazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774191B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E7741A1B5B40C7002CEB0E /* BaygazineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaygazineTests.swift; sourceTree = "<group>"; };
+		8A0877D20C8F0CB4F813CCA2 /* Pods-Baygazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baygazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine.release.xcconfig"; sourceTree = "<group>"; };
+		A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Baygazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F334CB436FE078CBD1BF06EE /* libPods-Baygazine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B2BBAB1BA113FA729EBC5A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4A59A422B96A2F047B8F1A18 /* Pods-Baygazine.debug.xcconfig */,
+				8A0877D20C8F0CB4F813CCA2 /* Pods-Baygazine.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		85E773F61B5B40C7002CEB0E = {
 			isa = PBXGroup;
 			children = (
 				85E774011B5B40C7002CEB0E /* Baygazine */,
 				85E774171B5B40C7002CEB0E /* BaygazineTests */,
 				85E774001B5B40C7002CEB0E /* Products */,
+				7B2BBAB1BA113FA729EBC5A1 /* Pods */,
+				B3D662FAC1812C0AF07EF20A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +128,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B3D662FAC1812C0AF07EF20A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A839FCF63DA15291630C64F7 /* libPods-Baygazine.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +143,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85E7741E1B5B40C7002CEB0E /* Build configuration list for PBXNativeTarget "Baygazine" */;
 			buildPhases = (
+				E2820F74CAC612F582186B3F /* Check Pods Manifest.lock */,
 				85E773FB1B5B40C7002CEB0E /* Sources */,
 				85E773FC1B5B40C7002CEB0E /* Frameworks */,
 				85E773FD1B5B40C7002CEB0E /* Resources */,
+				9EFF1D3CDE487CB6AB83834D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,6 +232,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9EFF1D3CDE487CB6AB83834D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2820F74CAC612F582186B3F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85E773FB1B5B40C7002CEB0E /* Sources */ = {
@@ -338,6 +397,7 @@
 		};
 		85E7741F1B5B40C7002CEB0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A59A422B96A2F047B8F1A18 /* Pods-Baygazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Baygazine/Info.plist;
@@ -348,6 +408,7 @@
 		};
 		85E774201B5B40C7002CEB0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A0877D20C8F0CB4F813CCA2 /* Pods-Baygazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Baygazine/Info.plist;
@@ -409,6 +470,7 @@
 				85E774201B5B40C7002CEB0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85E774211B5B40C7002CEB0E /* Build configuration list for PBXNativeTarget "BaygazineTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +479,7 @@
 				85E774231B5B40C7002CEB0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
