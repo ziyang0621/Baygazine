@@ -13,9 +13,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var newsViewControllers = [UIViewController]()
+
+    var mainNav: UINavigationController!
+    var menuNav: UINavigationController!
+    var sidebarVC: SidebarViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        let lifeStyleNewsListVC = UIStoryboard.lifeStyleNewsListViewController()
+        newsViewControllers.append(lifeStyleNewsListVC)
+        mainNav = UINavigationController(rootViewController: newsViewControllers[0])
+        
+        let menuVC = UIStoryboard.menuViewController()
+        menuVC.delegate = self
+        menuNav = UINavigationController(rootViewController: menuVC)
+        
+        sidebarVC = SidebarViewController(leftViewController: menuNav, mainViewController: mainNav, overlap: 50)
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.backgroundColor = UIColor.whiteColor()
+        window?.rootViewController = sidebarVC
+        window?.makeKeyAndVisible()
+
         return true
     }
 
@@ -41,6 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
 
+extension AppDelegate: MenuViewControllerDelegate {
+    func menuViewController(controller: MenuViewController, didSelectRow row: Int) {
+        println("menu vc delegate called")
+    }
+}
