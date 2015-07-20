@@ -22,6 +22,8 @@ class MenuViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerNib(UINib(nibName: "MenuCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
+        tableView.rowHeight = 100
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,13 +33,14 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: UITableViewDataSource {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel!.text = "test"
+        let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as! MenuCell
+        cell.menuText = "test"
         return cell
     }
 }

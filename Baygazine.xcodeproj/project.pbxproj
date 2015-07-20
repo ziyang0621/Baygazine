@@ -12,6 +12,8 @@
 		857437321B5DB29800044811 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437311B5DB29800044811 /* MenuViewController.swift */; };
 		857437341B5DB40F00044811 /* BayazineExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437331B5DB40F00044811 /* BayazineExtensions.swift */; };
 		857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */; };
+		8574373A1B5DBA6900044811 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437391B5DBA6900044811 /* MenuCell.swift */; };
+		8574373C1B5DBA7700044811 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574373B1B5DBA7700044811 /* MenuCell.xib */; };
 		85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774041B5B40C7002CEB0E /* AppDelegate.swift */; };
 		85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E774081B5B40C7002CEB0E /* Main.storyboard */; };
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
@@ -35,6 +37,8 @@
 		857437311B5DB29800044811 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		857437331B5DB40F00044811 /* BayazineExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BayazineExtensions.swift; sourceTree = "<group>"; };
 		857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeStyleNewsListViewController.swift; sourceTree = "<group>"; };
+		857437391B5DBA6900044811 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		8574373B1B5DBA7700044811 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		85E773FF1B5B40C7002CEB0E /* Baygazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baygazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774031B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E774041B5B40C7002CEB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 				8574372D1B5DA64300044811 /* SidebarViewController.swift */,
 				857437311B5DB29800044811 /* MenuViewController.swift */,
 				857437331B5DB40F00044811 /* BayazineExtensions.swift */,
+				857437391B5DBA6900044811 /* MenuCell.swift */,
+				8574373B1B5DBA7700044811 /* MenuCell.xib */,
 				85E774081B5B40C7002CEB0E /* Main.storyboard */,
 				85E7740B1B5B40C7002CEB0E /* Images.xcassets */,
 				85E7740D1B5B40C7002CEB0E /* LaunchScreen.xib */,
@@ -230,6 +236,7 @@
 			files = (
 				85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */,
 				85E7740F1B5B40C7002CEB0E /* LaunchScreen.xib in Resources */,
+				8574373C1B5DBA7700044811 /* MenuCell.xib in Resources */,
 				85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +305,7 @@
 			files = (
 				8574372E1B5DA64300044811 /* SidebarViewController.swift in Sources */,
 				85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */,
+				8574373A1B5DBA6900044811 /* MenuCell.swift in Sources */,
 				857437341B5DB40F00044811 /* BayazineExtensions.swift in Sources */,
 				857437321B5DB29800044811 /* MenuViewController.swift in Sources */,
 				857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */,
