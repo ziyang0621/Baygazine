@@ -48,8 +48,23 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oa6-hc-aYY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oa6-hc-aYY" secondAttribute="trailing" id="LgH-kJ-ncK"/>
+                            <constraint firstAttribute="bottom" secondItem="oa6-hc-aYY" secondAttribute="bottom" id="Rwd-4m-hRq"/>
+                            <constraint firstItem="oa6-hc-aYY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Z3k-1j-7OP"/>
+                            <constraint firstItem="oa6-hc-aYY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="fdZ-cW-0hH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="oa6-hc-aYY" id="LmV-qS-bBC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
