@@ -14,6 +14,12 @@
 		857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */; };
 		8574373A1B5DBA6900044811 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437391B5DBA6900044811 /* MenuCell.swift */; };
 		8574373C1B5DBA7700044811 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574373B1B5DBA7700044811 /* MenuCell.xib */; };
+		8574376F1B5EC25600044811 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574376E1B5EC25600044811 /* Post.swift */; };
+		857437711B5ECAE300044811 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437701B5ECAE300044811 /* Attachment.swift */; };
+		857437731B5ECB1800044811 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437721B5ECB1800044811 /* Author.swift */; };
+		857437771B5EDBCB00044811 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437761B5EDBCB00044811 /* GradientView.swift */; };
+		857437791B5EDC1300044811 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437781B5EDC1300044811 /* PostCell.swift */; };
+		8574377B1B5EDD0400044811 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574377A1B5EDD0400044811 /* PostCell.xib */; };
 		85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774041B5B40C7002CEB0E /* AppDelegate.swift */; };
 		85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E774081B5B40C7002CEB0E /* Main.storyboard */; };
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
@@ -39,6 +45,13 @@
 		857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeStyleNewsListViewController.swift; sourceTree = "<group>"; };
 		857437391B5DBA6900044811 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		8574373B1B5DBA7700044811 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		8574376E1B5EC25600044811 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		857437701B5ECAE300044811 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		857437721B5ECB1800044811 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		857437761B5EDBCB00044811 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		857437781B5EDC1300044811 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		8574377A1B5EDD0400044811 /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		8574377C1B5EE12E00044811 /* Baygazine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Baygazine-Bridging-Header.h"; sourceTree = "<group>"; };
 		85E773FF1B5B40C7002CEB0E /* Baygazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baygazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774031B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E774041B5B40C7002CEB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +93,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		857437741B5ECB6400044811 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8574376E1B5EC25600044811 /* Post.swift */,
+				857437701B5ECAE300044811 /* Attachment.swift */,
+				857437721B5ECB1800044811 /* Author.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		857437751B5EDBAE00044811 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				857437391B5DBA6900044811 /* MenuCell.swift */,
+				8574373B1B5DBA7700044811 /* MenuCell.xib */,
+				857437761B5EDBCB00044811 /* GradientView.swift */,
+				857437781B5EDC1300044811 /* PostCell.swift */,
+				8574377A1B5EDD0400044811 /* PostCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		85E773F61B5B40C7002CEB0E = {
 			isa = PBXGroup;
 			children = (
@@ -104,16 +139,17 @@
 			isa = PBXGroup;
 			children = (
 				85E774041B5B40C7002CEB0E /* AppDelegate.swift */,
+				857437741B5ECB6400044811 /* Model */,
+				857437751B5EDBAE00044811 /* View */,
 				857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */,
 				8574372D1B5DA64300044811 /* SidebarViewController.swift */,
 				857437311B5DB29800044811 /* MenuViewController.swift */,
 				857437331B5DB40F00044811 /* BayazineExtensions.swift */,
-				857437391B5DBA6900044811 /* MenuCell.swift */,
-				8574373B1B5DBA7700044811 /* MenuCell.xib */,
 				85E774081B5B40C7002CEB0E /* Main.storyboard */,
 				85E7740B1B5B40C7002CEB0E /* Images.xcassets */,
 				85E7740D1B5B40C7002CEB0E /* LaunchScreen.xib */,
 				85E774021B5B40C7002CEB0E /* Supporting Files */,
+				8574377C1B5EE12E00044811 /* Baygazine-Bridging-Header.h */,
 			);
 			path = Baygazine;
 			sourceTree = "<group>";
@@ -236,6 +272,7 @@
 			files = (
 				85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */,
 				85E7740F1B5B40C7002CEB0E /* LaunchScreen.xib in Resources */,
+				8574377B1B5EDD0400044811 /* PostCell.xib in Resources */,
 				8574373C1B5DBA7700044811 /* MenuCell.xib in Resources */,
 				85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */,
 			);
@@ -305,9 +342,14 @@
 			files = (
 				8574372E1B5DA64300044811 /* SidebarViewController.swift in Sources */,
 				85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */,
+				857437771B5EDBCB00044811 /* GradientView.swift in Sources */,
 				8574373A1B5DBA6900044811 /* MenuCell.swift in Sources */,
+				857437731B5ECB1800044811 /* Author.swift in Sources */,
 				857437341B5DB40F00044811 /* BayazineExtensions.swift in Sources */,
+				857437711B5ECAE300044811 /* Attachment.swift in Sources */,
 				857437321B5DB29800044811 /* MenuViewController.swift in Sources */,
+				857437791B5EDC1300044811 /* PostCell.swift in Sources */,
+				8574376F1B5EC25600044811 /* Post.swift in Sources */,
 				857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,9 +478,12 @@
 			baseConfigurationReference = 4A59A422B96A2F047B8F1A18 /* Pods-Baygazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Baygazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Baygazine/Baygazine-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -447,9 +492,11 @@
 			baseConfigurationReference = 8A0877D20C8F0CB4F813CCA2 /* Pods-Baygazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Baygazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Baygazine/Baygazine-Bridging-Header.h";
 			};
 			name = Release;
 		};

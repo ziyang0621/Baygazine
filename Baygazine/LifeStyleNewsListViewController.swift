@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import SwiftyJSON
+import AFNetworking
 
 class LifeStyleNewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var currentPage = 1
     var populatingPosts = false
+    var posts = [Post]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerNib(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
         
         populatePosts()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,8 +45,14 @@ class LifeStyleNewsListViewController: UIViewController {
         session.dataTaskWithRequest(request, completionHandler: {
             (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
             if error == nil {
-                let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
-                println(dict)
+                let json = JSON(data: data)
+                for index in 0..<json["posts"].arrayValue.count {
+                    let newPost = Post(json: json["posts"][index])
+                    self.posts.append(newPost)
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             } else {
                 println(error.userInfo?["error"] as? String)
             }
@@ -51,13 +62,19 @@ class LifeStyleNewsListViewController: UIViewController {
 }
 
 extension LifeStyleNewsListViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 150
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return posts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel!.text = "test"
+        let cell = tableView.dequeueReusableCellWithIdentifier("PostCell", forIndexPath: indexPath) as! PostCell
+        let post = posts[indexPath.row]
+        cell.titleLabel.text = post.title
+        cell.thumbnailImageView.setImageWithURL(NSURL(string: post.thumbnailUrl!)!)
         return cell
     }
 }

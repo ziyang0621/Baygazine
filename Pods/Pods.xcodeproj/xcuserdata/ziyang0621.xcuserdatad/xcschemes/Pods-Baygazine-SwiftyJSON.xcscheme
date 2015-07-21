@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "31E4BFF881A921D931D95F94"
-               BuildableName = "Realm.framework"
-               BlueprintName = "Pods-Baygazine-Realm"
+               BlueprintIdentifier = "A6962F92FC89A25C0D78C5D5"
+               BuildableName = "SwiftyJSON.framework"
+               BlueprintName = "Pods-Baygazine-SwiftyJSON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
