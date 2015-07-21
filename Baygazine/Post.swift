@@ -16,6 +16,8 @@ class Post: NSObject {
     var attachments: [Attachment]?
     var thumbnailUrl: String?
     var author: Author?
+    var createdDate: String?
+    var modifiedDate: String?
     
     init(json: JSON) {
         id = json["id"].int
@@ -28,5 +30,7 @@ class Post: NSObject {
         }
         thumbnailUrl = json["attachments"][0]["url"].string
         author = Author(json: json["author"])
+        createdDate = json["date"].string
+        modifiedDate = json["modified"].string
     }
 }

@@ -13,7 +13,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KSu-Xa-HO5">
-                        <rect key="frame" x="0.0" y="0.0" width="455" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="455" height="149.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="150" id="PlL-iG-2NR"/>
                         </constraints>
@@ -26,7 +26,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuM-2W-Ur0">
-                        <rect key="frame" x="206" y="100" width="42" height="50"/>
+                        <rect key="frame" x="206" y="99.5" width="42" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="zDa-Yh-zP0"/>
                         </constraints>

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kThemeColor = UIColor.colorWithRGBHex(0x0D72A8, alpha: 1.0)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,7 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sidebarVC: SidebarViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
+        
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
+        UINavigationBar.appearance().setBackgroundImage(UIColor.imageWithColor(kThemeColor), forBarMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIColor.imageWithColor(kThemeColor)
+        UINavigationBar.appearance().translucent = true
 
         let lifeStyleNewsListVC = UIStoryboard.lifeStyleNewsListViewController()
         newsViewControllers.append(lifeStyleNewsListVC)
