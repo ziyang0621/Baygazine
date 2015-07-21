@@ -37,6 +37,39 @@
             </objects>
             <point key="canvasLocation" x="-20" y="546"/>
         </scene>
+        <!--Post Detail View Controller-->
+        <scene sceneID="6xR-2i-ryv">
+            <objects>
+                <viewController storyboardIdentifier="PostDetailViewController" id="fqw-2m-F86" customClass="PostDetailViewController" customModule="Baygazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vqN-b2-Pee"/>
+                        <viewControllerLayoutGuide type="bottom" id="QtR-Rg-WOd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gwk-vr-gtI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLL-iK-1QT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lLL-iK-1QT" firstAttribute="top" secondItem="gwk-vr-gtI" secondAttribute="top" id="1u1-9I-LRm"/>
+                            <constraint firstItem="QtR-Rg-WOd" firstAttribute="top" secondItem="lLL-iK-1QT" secondAttribute="bottom" id="KLq-Rf-lIO"/>
+                            <constraint firstAttribute="trailing" secondItem="lLL-iK-1QT" secondAttribute="trailing" id="MSQ-Fb-cDV"/>
+                            <constraint firstItem="lLL-iK-1QT" firstAttribute="leading" secondItem="gwk-vr-gtI" secondAttribute="leading" id="Npu-j0-ibi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="lLL-iK-1QT" id="LEG-fn-hHf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z2O-BQ-HKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="663" y="-180"/>
+        </scene>
         <!--Life Style News List View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>

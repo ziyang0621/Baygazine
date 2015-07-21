@@ -20,6 +20,8 @@ class LifeStyleNewsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "生活"
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -126,6 +128,9 @@ extension LifeStyleNewsListViewController: UITableViewDataSource {
 
 extension LifeStyleNewsListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let post = posts[indexPath.row]
+        let postVC = UIStoryboard.postDetailViewController()
+        postVC.post = post
+        navigationController?.showViewController(postVC, sender: self)
     }
 }

@@ -13,7 +13,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KSu-Xa-HO5">
-                        <rect key="frame" x="0.0" y="0.0" width="455" height="149.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="455" height="150"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="150" id="PlL-iG-2NR"/>
                         </constraints>
@@ -26,7 +26,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuM-2W-Ur0">
-                        <rect key="frame" x="206" y="99.5" width="42" height="50"/>
+                        <rect key="frame" x="5" y="100" width="445" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="zDa-Yh-zP0"/>
                         </constraints>
@@ -38,11 +38,13 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="j3e-fm-wch" secondAttribute="bottom" id="0Cd-tN-Kl9"/>
                     <constraint firstAttribute="trailing" secondItem="j3e-fm-wch" secondAttribute="trailing" id="5hY-GD-Z6n"/>
+                    <constraint firstItem="wuM-2W-Ur0" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" constant="5" id="98J-xo-PyI"/>
                     <constraint firstAttribute="centerX" secondItem="wuM-2W-Ur0" secondAttribute="centerX" id="DaR-W4-BSl"/>
                     <constraint firstAttribute="bottom" secondItem="wuM-2W-Ur0" secondAttribute="bottom" id="JTu-Iw-gtI"/>
                     <constraint firstItem="KSu-Xa-HO5" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="YSY-Gv-7c7"/>
                     <constraint firstAttribute="trailing" secondItem="KSu-Xa-HO5" secondAttribute="trailing" id="cqx-F0-hh4"/>
                     <constraint firstItem="j3e-fm-wch" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="d7G-xj-eFY"/>
+                    <constraint firstAttribute="trailing" secondItem="wuM-2W-Ur0" secondAttribute="trailing" constant="5" id="hb9-8Z-fKT"/>
                     <constraint firstAttribute="bottom" secondItem="KSu-Xa-HO5" secondAttribute="bottom" id="s1q-h4-Wrb"/>
                 </constraints>
             </tableViewCellContentView>

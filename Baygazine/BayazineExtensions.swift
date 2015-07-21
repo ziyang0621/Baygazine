@@ -65,4 +65,8 @@ extension UIStoryboard {
     class func menuViewController() -> MenuViewController {
         return mainStoryboard().instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
     }
+    
+    class func postDetailViewController() -> PostDetailViewController {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("PostDetailViewController") as! PostDetailViewController
+    }
 }
