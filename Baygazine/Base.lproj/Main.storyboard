@@ -49,21 +49,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLL-iK-1QT">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-pT-v3t">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0V-T2-x8E">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xr0-Ik-Veb">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E49-aI-kUL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="200" id="oCC-Pd-udi"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="E49-aI-kUL" firstAttribute="top" secondItem="Xr0-Ik-Veb" secondAttribute="top" id="1be-dC-AkC"/>
+                                                    <constraint firstItem="E49-aI-kUL" firstAttribute="leading" secondItem="Xr0-Ik-Veb" secondAttribute="leading" id="AiS-aX-uBm"/>
+                                                    <constraint firstAttribute="height" constant="200" id="HCS-mH-eTE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="E49-aI-kUL" secondAttribute="trailing" id="JWh-1B-NBt"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Xr0-Ik-Veb" firstAttribute="width" secondItem="S0V-T2-x8E" secondAttribute="width" id="9Sg-5b-eS2"/>
+                                            <constraint firstItem="Xr0-Ik-Veb" firstAttribute="top" secondItem="S0V-T2-x8E" secondAttribute="top" id="9op-2o-s57"/>
+                                            <constraint firstItem="Xr0-Ik-Veb" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" id="kh4-xo-Ci2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="S0V-T2-x8E" firstAttribute="top" secondItem="pR9-pT-v3t" secondAttribute="top" id="2gL-0s-OwZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="S0V-T2-x8E" secondAttribute="bottom" id="3l8-A9-bAp"/>
+                                    <constraint firstItem="S0V-T2-x8E" firstAttribute="leading" secondItem="pR9-pT-v3t" secondAttribute="leading" id="I5z-Dx-Ytu"/>
+                                    <constraint firstAttribute="centerX" secondItem="S0V-T2-x8E" secondAttribute="centerX" id="g9I-5w-bLd"/>
+                                    <constraint firstAttribute="trailing" secondItem="S0V-T2-x8E" secondAttribute="trailing" id="ijt-8a-L88"/>
+                                    <constraint firstAttribute="centerY" secondItem="S0V-T2-x8E" secondAttribute="centerY" id="o1q-1o-gRF"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lLL-iK-1QT" firstAttribute="top" secondItem="gwk-vr-gtI" secondAttribute="top" id="1u1-9I-LRm"/>
-                            <constraint firstItem="QtR-Rg-WOd" firstAttribute="top" secondItem="lLL-iK-1QT" secondAttribute="bottom" id="KLq-Rf-lIO"/>
-                            <constraint firstAttribute="trailing" secondItem="lLL-iK-1QT" secondAttribute="trailing" id="MSQ-Fb-cDV"/>
-                            <constraint firstItem="lLL-iK-1QT" firstAttribute="leading" secondItem="gwk-vr-gtI" secondAttribute="leading" id="Npu-j0-ibi"/>
+                            <constraint firstItem="pR9-pT-v3t" firstAttribute="leading" secondItem="gwk-vr-gtI" secondAttribute="leading" id="Ehz-hN-RhV"/>
+                            <constraint firstItem="pR9-pT-v3t" firstAttribute="top" secondItem="gwk-vr-gtI" secondAttribute="top" id="Pfu-qO-I8o"/>
+                            <constraint firstAttribute="trailing" secondItem="pR9-pT-v3t" secondAttribute="trailing" id="UJq-OA-Gjt"/>
+                            <constraint firstAttribute="bottom" secondItem="pR9-pT-v3t" secondAttribute="bottom" id="iYq-MS-RJ5"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="webView" destination="lLL-iK-1QT" id="LEG-fn-hHf"/>
+                        <outlet property="headerImageView" destination="E49-aI-kUL" id="51c-A3-Pff"/>
+                        <outlet property="headerImageViewHeightLayoutConstraint" destination="oCC-Pd-udi" id="xXg-u0-kRR"/>
+                        <outlet property="headerView" destination="Xr0-Ik-Veb" id="oQB-nP-5Fs"/>
+                        <outlet property="scrollView" destination="pR9-pT-v3t" id="mLq-H9-QiE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2O-BQ-HKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
