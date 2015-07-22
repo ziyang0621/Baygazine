@@ -71,8 +71,8 @@ extension UIStoryboard {
         return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     }
     
-    class func lifeStyleNewsListViewController() ->  LifeStyleNewsListViewController {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("LifeStyleNewsListViewController") as! LifeStyleNewsListViewController
+    class func newsListViewController() -> NewsListViewController {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("NewsListViewController") as! NewsListViewController
     }
     
     class func menuViewController() -> MenuViewController {

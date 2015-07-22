@@ -11,7 +11,6 @@
 		8574372E1B5DA64300044811 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574372D1B5DA64300044811 /* SidebarViewController.swift */; };
 		857437321B5DB29800044811 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437311B5DB29800044811 /* MenuViewController.swift */; };
 		857437341B5DB40F00044811 /* BayazineExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437331B5DB40F00044811 /* BayazineExtensions.swift */; };
-		857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */; };
 		8574373A1B5DBA6900044811 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437391B5DBA6900044811 /* MenuCell.swift */; };
 		8574373C1B5DBA7700044811 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574373B1B5DBA7700044811 /* MenuCell.xib */; };
 		8574376F1B5EC25600044811 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574376E1B5EC25600044811 /* Post.swift */; };
@@ -21,6 +20,7 @@
 		857437791B5EDC1300044811 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437781B5EDC1300044811 /* PostCell.swift */; };
 		8574377B1B5EDD0400044811 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574377A1B5EDD0400044811 /* PostCell.xib */; };
 		857437821B5F058300044811 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437811B5F058300044811 /* PostDetailViewController.swift */; };
+		857437851B5F5DF900044811 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437841B5F5DF900044811 /* NewsListViewController.swift */; };
 		85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774041B5B40C7002CEB0E /* AppDelegate.swift */; };
 		85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E774081B5B40C7002CEB0E /* Main.storyboard */; };
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
@@ -43,7 +43,6 @@
 		8574372D1B5DA64300044811 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		857437311B5DB29800044811 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		857437331B5DB40F00044811 /* BayazineExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BayazineExtensions.swift; sourceTree = "<group>"; };
-		857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeStyleNewsListViewController.swift; sourceTree = "<group>"; };
 		857437391B5DBA6900044811 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		8574373B1B5DBA7700044811 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		8574376E1B5EC25600044811 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		8574377A1B5EDD0400044811 /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		8574377C1B5EE12E00044811 /* Baygazine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Baygazine-Bridging-Header.h"; sourceTree = "<group>"; };
 		857437811B5F058300044811 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		857437841B5F5DF900044811 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		85E773FF1B5B40C7002CEB0E /* Baygazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baygazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774031B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E774041B5B40C7002CEB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 				85E774041B5B40C7002CEB0E /* AppDelegate.swift */,
 				857437741B5ECB6400044811 /* Model */,
 				857437751B5EDBAE00044811 /* View */,
-				857437371B5DB59D00044811 /* LifeStyleNewsListViewController.swift */,
+				857437841B5F5DF900044811 /* NewsListViewController.swift */,
 				857437811B5F058300044811 /* PostDetailViewController.swift */,
 				8574372D1B5DA64300044811 /* SidebarViewController.swift */,
 				857437311B5DB29800044811 /* MenuViewController.swift */,
@@ -354,7 +354,7 @@
 				857437321B5DB29800044811 /* MenuViewController.swift in Sources */,
 				857437791B5EDC1300044811 /* PostCell.swift in Sources */,
 				8574376F1B5EC25600044811 /* Post.swift in Sources */,
-				857437381B5DB59D00044811 /* LifeStyleNewsListViewController.swift in Sources */,
+				857437851B5F5DF900044811 /* NewsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,28 +1,27 @@
 //
-//  LifeStyleNewsListViewController.swift
-//  
+//  NewsListViewController.swift
+//  Baygazine
 //
-//  Created by Ziyang Tan on 7/20/15.
+//  Created by Ziyang Tan on 7/21/15.
+//  Copyright (c) 2015 Ziyang Tan. All rights reserved.
 //
-//
-
 import UIKit
 import SwiftyJSON
 import AFNetworking
 
-class LifeStyleNewsListViewController: UIViewController {
+class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var currentPage = 1
     var populatingPosts = false
     var posts = [Post]()
     let refreshControl = UIRefreshControl()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "生活"
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
@@ -34,7 +33,7 @@ class LifeStyleNewsListViewController: UIViewController {
         
         populatePosts()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,7 +55,7 @@ class LifeStyleNewsListViewController: UIViewController {
         
         populatePosts()
     }
-
+    
     
     func populatePosts() {
         if populatingPosts {
@@ -94,7 +93,7 @@ class LifeStyleNewsListViewController: UIViewController {
     
 }
 
-extension LifeStyleNewsListViewController: UITableViewDataSource {
+extension NewsListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 151
     }
@@ -106,7 +105,7 @@ extension LifeStyleNewsListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell", forIndexPath: indexPath) as! PostCell
         let post = posts[indexPath.row]
-
+        
         cell.titleText = post.title
         if let thumbnailURL = post.thumbnailUrl {
             let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -127,7 +126,7 @@ extension LifeStyleNewsListViewController: UITableViewDataSource {
     }
 }
 
-extension LifeStyleNewsListViewController: UITableViewDelegate {
+extension NewsListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let post = posts[indexPath.row]
         let postVC = UIStoryboard.postDetailViewController()

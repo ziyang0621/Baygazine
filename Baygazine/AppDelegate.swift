@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIColor.imageWithColor(kThemeColor)
         UINavigationBar.appearance().translucent = true
 
-        let lifeStyleNewsListVC = UIStoryboard.lifeStyleNewsListViewController()
-        newsViewControllers.append(lifeStyleNewsListVC)
+        let newsListVC = UIStoryboard.newsListViewController()
+        newsViewControllers.append(newsListVC)
         mainNav = UINavigationController(rootViewController: newsViewControllers[0])
         
         let menuVC = UIStoryboard.menuViewController()
