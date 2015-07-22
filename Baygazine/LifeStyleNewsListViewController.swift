@@ -26,6 +26,7 @@ class LifeStyleNewsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
+        tableView.separatorStyle = .None
         
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.addTarget(self, action: "handleRefresh", forControlEvents: .ValueChanged)
@@ -63,7 +64,7 @@ class LifeStyleNewsListViewController: UIViewController {
         }
         
         populatingPosts = true
-        let getPostsURL = "http://baygazine.com/category/life-style/?json=1&page=\(currentPage)"
+        let getPostsURL = "http://baygazine.com/category/life-style/?json=1&count=8&page=\(currentPage)"
         let request = NSURLRequest(URL: NSURL(string: getPostsURL)!)
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {
@@ -95,7 +96,7 @@ class LifeStyleNewsListViewController: UIViewController {
 
 extension LifeStyleNewsListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 150
+        return 151
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,8 +106,8 @@ extension LifeStyleNewsListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell", forIndexPath: indexPath) as! PostCell
         let post = posts[indexPath.row]
-        cell.titleLabel.text = post.title
 
+        cell.titleText = post.title
         if let thumbnailURL = post.thumbnailUrl {
             let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
             cell.thumbnailImageView.addSubview(activityIndicator)

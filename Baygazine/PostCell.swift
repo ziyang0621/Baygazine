@@ -11,8 +11,19 @@ import UIKit
 class PostCell: UITableViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet private weak var gradientView: GradientView!
+    @IBOutlet private weak var titleTextView: UITextView!
+        
+    var titleText: String? {
+        didSet {
+            if let titleText = titleText {
+                titleTextView.text = titleText
+                titleTextView.textColor = UIColor.whiteColor()
+                titleTextView.font = UIFont(name: "HelveticaNeue", size: 17)
+                titleTextView.textAlignment = .Center
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

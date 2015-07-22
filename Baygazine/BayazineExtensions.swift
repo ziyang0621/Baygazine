@@ -8,6 +8,19 @@
 
 import UIKit
 
+extension String {
+    init(htmlEncodedString: String) {
+        let encodedData = htmlEncodedString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let attributedOptions : [String: AnyObject] = [
+            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 17)!
+        ]
+        let attributedString = NSMutableAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil, error: nil)!
+        self.init(attributedString.string)
+    }
+}
+
 extension UIColor {
     class func imageWithColor(color :UIColor) -> UIImage {
         let rect = CGRectMake(0, 0, 1, 1)

@@ -18,11 +18,13 @@ class Post: NSObject {
     var author: Author?
     var createdDate: String?
     var modifiedDate: String?
+    var content: String?
+    var excerpt: String?
     
     init(json: JSON) {
         id = json["id"].int
         url = json["url"].string
-        title = json["title"].string
+        title = String(htmlEncodedString: json["title"].string!)
         attachments = [Attachment]()
         for index in 0..<json["attachments"].array!.count {
             let attachment = Attachment(json: json["attachments"][index])
@@ -32,5 +34,7 @@ class Post: NSObject {
         author = Author(json: json["author"])
         createdDate = json["date"].string
         modifiedDate = json["modified"].string
+        content = json["content"].string
+        excerpt = json["excerpt"].string
     }
 }

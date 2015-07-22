@@ -17,9 +17,7 @@ class PostDetailViewController: UIViewController {
         super.viewDidLoad()
 
         if let post = post {
-            let requestURL = NSURL(string: post.url!)
-            let request = NSURLRequest(URL: requestURL!)
-            webView.loadRequest(request)
+            webView.loadHTMLString(post.content! + post.excerpt!, baseURL: nil)
         }
     }
 
