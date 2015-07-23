@@ -70,6 +70,7 @@ class NewsListViewController: UIViewController {
         session.dataTaskWithRequest(request, completionHandler: {
             (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
             self.refreshControl.endRefreshing()
+            println("request end")
             if error == nil {
                 let json = JSON(data: data)
                 let totalPages = json["pages"].int

@@ -64,8 +64,8 @@ class PostDetailViewController: UIViewController {
         dateLabel.text = post!.createdDate!
         webView.delegate = self
         
-        let styleString = "<style>img {width:100%}</style>"
-        webView.loadHTMLString(styleString + post!.content!, baseURL: nil)
+        let styleString = "<style>iframe {width:100%} img {width:100%;pointer-events: none;cursor: default}</style>"
+        webView.loadHTMLString(styleString + post!.content! + post!.excerpt!, baseURL: nil)
     }
   
     override func viewDidLayoutSubviews() {
@@ -108,6 +108,7 @@ class PostDetailViewController: UIViewController {
         if self.webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding > self.view.bounds.height {
             self.scrollView.contentSize.height = self.webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding
         }
+        webView.stringByEvaluatingJavaScriptFromString("")
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
