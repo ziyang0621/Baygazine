@@ -66,6 +66,16 @@ extension UIImage {
     }
 }
 
+extension NSDate {
+    class func baygazineJSONDateToFormattedDate(bgDateString: String) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString = dateFormatter.dateFromString(bgDateString)
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        return dateFormatter.stringFromDate(dateFromString!)
+    }
+}
+
 extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())

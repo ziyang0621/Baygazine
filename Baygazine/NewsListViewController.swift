@@ -8,6 +8,7 @@
 import UIKit
 import SwiftyJSON
 import AFNetworking
+import KVNProgress
 
 class NewsListViewController: UIViewController {
     

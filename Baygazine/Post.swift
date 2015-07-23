@@ -25,6 +25,7 @@ class Post: NSObject {
         id = json["id"].int
         url = json["url"].string
         title = String(htmlEncodedString: json["title"].string!)
+     //   title = json["title"].string
         attachments = [Attachment]()
         for index in 0..<json["attachments"].array!.count {
             let attachment = Attachment(json: json["attachments"][index])
@@ -32,9 +33,10 @@ class Post: NSObject {
         }
         thumbnailUrl = json["attachments"][0]["url"].string
         author = Author(json: json["author"])
-        createdDate = json["date"].string
-        modifiedDate = json["modified"].string
         content = json["content"].string
         excerpt = json["excerpt"].string
+        
+        createdDate = NSDate.baygazineJSONDateToFormattedDate(json["date"].string!)
+        modifiedDate = NSDate.baygazineJSONDateToFormattedDate(json["modified"].string!)
     }
 }

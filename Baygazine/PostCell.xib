@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,11 +26,11 @@
                             <constraint firstAttribute="height" constant="50" id="Qcv-of-fsg"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dr1-iv-iBt">
-                        <rect key="frame" x="5" y="100" width="445" height="50"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="G1X-Yo-7ba">
+                        <rect key="frame" x="18" y="100" width="419" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="gvy-cj-DcE"/>
+                            <constraint firstAttribute="height" constant="50" id="EtE-Rp-cko"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,19 +40,19 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="j3e-fm-wch" secondAttribute="bottom" id="0Cd-tN-Kl9"/>
                     <constraint firstAttribute="trailing" secondItem="j3e-fm-wch" secondAttribute="trailing" id="5hY-GD-Z6n"/>
-                    <constraint firstItem="dr1-iv-iBt" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" constant="5" id="Hji-py-dLk"/>
+                    <constraint firstItem="G1X-Yo-7ba" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leadingMargin" constant="10" id="9eg-Tx-4k2"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="G1X-Yo-7ba" secondAttribute="trailing" constant="10" id="JSi-jW-aAE"/>
+                    <constraint firstItem="KSu-Xa-HO5" firstAttribute="bottom" secondItem="G1X-Yo-7ba" secondAttribute="bottom" id="UaH-iY-3gb"/>
                     <constraint firstItem="KSu-Xa-HO5" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="YSY-Gv-7c7"/>
                     <constraint firstAttribute="trailing" secondItem="KSu-Xa-HO5" secondAttribute="trailing" id="cqx-F0-hh4"/>
                     <constraint firstItem="j3e-fm-wch" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="d7G-xj-eFY"/>
-                    <constraint firstItem="KSu-Xa-HO5" firstAttribute="bottom" secondItem="dr1-iv-iBt" secondAttribute="bottom" id="dAB-az-Krv"/>
                     <constraint firstAttribute="bottom" secondItem="KSu-Xa-HO5" secondAttribute="bottom" id="s1q-h4-Wrb"/>
-                    <constraint firstAttribute="trailing" secondItem="dr1-iv-iBt" secondAttribute="trailing" constant="5" id="xoW-5x-cGK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="gradientView" destination="j3e-fm-wch" id="ebJ-Y5-6EW"/>
                 <outlet property="thumbnailImageView" destination="KSu-Xa-HO5" id="wry-7m-BZh"/>
-                <outlet property="titleLabel" destination="dr1-iv-iBt" id="6I7-k5-YhL"/>
+                <outlet property="titleLabel" destination="G1X-Yo-7ba" id="ufw-Ig-Tvd"/>
             </connections>
             <point key="canvasLocation" x="401" y="251"/>
         </tableViewCell>
