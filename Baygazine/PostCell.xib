@@ -25,34 +25,33 @@
                             <constraint firstAttribute="height" constant="50" id="Qcv-of-fsg"/>
                         </constraints>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awq-OP-cao">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dr1-iv-iBt">
                         <rect key="frame" x="5" y="100" width="445" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="amB-9k-nqy"/>
+                            <constraint firstAttribute="height" constant="50" id="gvy-cj-DcE"/>
                         </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="j3e-fm-wch" secondAttribute="bottom" id="0Cd-tN-Kl9"/>
                     <constraint firstAttribute="trailing" secondItem="j3e-fm-wch" secondAttribute="trailing" id="5hY-GD-Z6n"/>
-                    <constraint firstAttribute="trailing" secondItem="awq-OP-cao" secondAttribute="trailing" constant="5" id="6xh-He-O0v"/>
+                    <constraint firstItem="dr1-iv-iBt" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" constant="5" id="Hji-py-dLk"/>
                     <constraint firstItem="KSu-Xa-HO5" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="YSY-Gv-7c7"/>
-                    <constraint firstAttribute="centerX" secondItem="awq-OP-cao" secondAttribute="centerX" id="cGQ-e2-aE7"/>
                     <constraint firstAttribute="trailing" secondItem="KSu-Xa-HO5" secondAttribute="trailing" id="cqx-F0-hh4"/>
                     <constraint firstItem="j3e-fm-wch" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" id="d7G-xj-eFY"/>
+                    <constraint firstItem="KSu-Xa-HO5" firstAttribute="bottom" secondItem="dr1-iv-iBt" secondAttribute="bottom" id="dAB-az-Krv"/>
                     <constraint firstAttribute="bottom" secondItem="KSu-Xa-HO5" secondAttribute="bottom" id="s1q-h4-Wrb"/>
-                    <constraint firstItem="awq-OP-cao" firstAttribute="leading" secondItem="MVX-oM-8LU" secondAttribute="leading" constant="5" id="xET-Bw-tDH"/>
-                    <constraint firstAttribute="bottom" secondItem="awq-OP-cao" secondAttribute="bottom" id="xMb-ja-v5U"/>
+                    <constraint firstAttribute="trailing" secondItem="dr1-iv-iBt" secondAttribute="trailing" constant="5" id="xoW-5x-cGK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="gradientView" destination="j3e-fm-wch" id="ebJ-Y5-6EW"/>
                 <outlet property="thumbnailImageView" destination="KSu-Xa-HO5" id="wry-7m-BZh"/>
-                <outlet property="titleTextView" destination="awq-OP-cao" id="Pc2-PI-aDb"/>
+                <outlet property="titleLabel" destination="dr1-iv-iBt" id="6I7-k5-YhL"/>
             </connections>
             <point key="canvasLocation" x="401" y="251"/>
         </tableViewCell>

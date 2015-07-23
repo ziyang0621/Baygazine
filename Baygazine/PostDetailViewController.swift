@@ -15,8 +15,11 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet private weak var headerImageViewHeightLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerImageViewHeightLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var gradientView: GradientView!
+    @IBOutlet weak var titleLabel: UILabel!
     var post: Post?
+    var thumbnailImage: UIImage?
     var headerViewFrame: CGRect!
     var maximumStretchHeight: CGFloat?
     var headerImageViewHeight: CGFloat = 0
@@ -32,34 +35,24 @@ class PostDetailViewController: UIViewController {
         headerImageViewHeight = CGRectGetHeight(headerImageView.frame)
         maximumStretchHeight = CGRectGetWidth(scrollView.bounds)
         
-        loadThumnailImage()
+        loadArticle()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    func loadThumnailImage() {
-        if let thumbnailURL = post!.thumbnailUrl {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            headerImageView.addSubview(activityIndicator)
-            activityIndicator.center = headerImageView.center
-            activityIndicator.startAnimating()
-            let request = NSURLRequest(URL: NSURL(string: thumbnailURL)!)
-            headerImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
-                (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
-                activityIndicator.removeFromSuperview()
-                self.headerImageView.image = image
-                }, failure: nil)
+    func loadArticle() {
+        if let thumbnailImage = thumbnailImage {
+            headerImageView.image = thumbnailImage
         } else {
             headerImageView.image = UIColor.imageWithColor(kThemeColor)
         }
-
+        titleLabel.text = post?.title!
     }
   
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        println("did layout")
         didLayoutSubviews = true
     }
 
@@ -72,7 +65,6 @@ class PostDetailViewController: UIViewController {
         let insets = scrollView.contentInset
         let offset = scrollView.contentOffset
         let minY = -insets.top
-        println("offsetY \(offset.y) minY \(minY)")
         if offset.y < minY {
             let deltaY = fabs(offset.y - minY)
             var frame = headerViewFrame
@@ -81,10 +73,11 @@ class PostDetailViewController: UIViewController {
             headerView.frame = frame
             
             if (previousHeight != CGRectGetHeight(frame)) {
-                println("previousHeight \(previousHeight)")
                 headerImageViewHeightLayoutConstraint.constant = headerImageViewHeight + deltaY
                 previousHeight = CGRectGetHeight(frame)
             }
+            
+            println("\(gradientView.frame) \(headerImageView.frame) \(headerView.frame)")
         }
 
     }

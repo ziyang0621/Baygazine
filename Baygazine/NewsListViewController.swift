@@ -106,7 +106,7 @@ extension NewsListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell", forIndexPath: indexPath) as! PostCell
         let post = posts[indexPath.row]
         
-        cell.titleText = post.title
+        cell.titleLabel.text = post.title
         if let thumbnailURL = post.thumbnailUrl {
             let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
             cell.thumbnailImageView.addSubview(activityIndicator)
@@ -131,6 +131,7 @@ extension NewsListViewController: UITableViewDelegate {
         let post = posts[indexPath.row]
         let postVC = UIStoryboard.postDetailViewController()
         postVC.post = post
+        postVC.thumbnailImage = (tableView.cellForRowAtIndexPath(indexPath) as! PostCell).thumbnailImageView.image
         navigationController?.showViewController(postVC, sender: self)
     }
 }

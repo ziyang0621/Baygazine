@@ -12,18 +12,7 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var gradientView: GradientView!
-    @IBOutlet private weak var titleTextView: UITextView!
-        
-    var titleText: String? {
-        didSet {
-            if let titleText = titleText {
-                titleTextView.text = titleText
-                titleTextView.textColor = UIColor.whiteColor()
-                titleTextView.font = UIFont(name: "HelveticaNeue", size: 17)
-                titleTextView.textAlignment = .Center
-            }
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
