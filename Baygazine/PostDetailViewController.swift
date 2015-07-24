@@ -8,6 +8,7 @@
 
 import UIKit
 import KVNProgress
+import WebKit
 
 private let kHeaderViewHeight: CGFloat = 200.0
 private let kBottmPadding: CGFloat = 50.0
@@ -18,12 +19,15 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerImageViewHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerImageViewTopLayoutContraint: NSLayoutConstraint!
-    @IBOutlet weak var webViewHeightLayoutContraint: NSLayoutConstraint!
+    @IBOutlet weak var webViewContainerHeightLayoutContraint: NSLayoutConstraint!
+    @IBOutlet weak var containerHeightLayoutContraint: NSLayoutConstraint!
+    @IBOutlet weak var containerWidthLayoutContraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var webViewContainer: UIView!
+    var webView: WKWebView!
     var post: Post?
     var thumbnailImage: UIImage?
     var headerViewFrame: CGRect!
@@ -41,10 +45,18 @@ class PostDetailViewController: UIViewController {
         maximumStretchHeight = CGRectGetWidth(scrollView.bounds)
         containerViewFrame = containerView.frame
         
-        println("view did load: \(webView.scrollView.contentSize.width) \(scrollView.frame)")
+        println("view did load \(containerView.frame)")
+        
+        containerHeightLayoutContraint.constant = CGRectGetHeight(view.bounds)
+        containerWidthLayoutContraint.constant = CGRectGetWidth(view.bounds)
         
         KVNProgress.showWithStatus("Loading...", onView: navigationController?.view)
         loadArticle()
+    }
+    
+    deinit {
+        scrollView.delegate = nil
+        webView.navigationDelegate = nil
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -62,9 +74,20 @@ class PostDetailViewController: UIViewController {
         authorLabel.text = "by \(post!.author!.nickName!)"
         dateLabel.textColor = UIColor.darkGrayColor()
         dateLabel.text = post!.createdDate!
-        webView.delegate = self
         
-        let styleString = "<style>iframe {width:100%} img {width:100%;pointer-events: none;cursor: default}</style>"
+        webView = WKWebView(frame: CGRectZero)
+        webViewContainer.addSubview(webView)
+        webView.navigationDelegate = self
+        
+        webView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let topConstraint = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: webViewContainer, attribute: .Top, multiplier: 1, constant: 0)
+        let bottomConstraint = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: webViewContainer, attribute: .Bottom, multiplier: 1, constant: 0)
+        let leftConstraint = NSLayoutConstraint(item: webView, attribute: .Left, relatedBy: .Equal, toItem: webViewContainer, attribute: .Left, multiplier: 1, constant: 0)
+        let rightConstraint = NSLayoutConstraint(item: webView, attribute: .Right, relatedBy: .Equal, toItem: webViewContainer, attribute: .Right, multiplier: 1, constant: 0)
+
+        NSLayoutConstraint.activateConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+        
+        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default} body{font-size:200%}</style>"
         webView.loadHTMLString(styleString + post!.content! + post!.excerpt!, baseURL: nil)
     }
   
@@ -85,10 +108,6 @@ class PostDetailViewController: UIViewController {
     }
     
     func updateHeaderImageView() {
-        if scrollView == nil {
-            println("nil scrollview")
-            return
-        }
         let insets = scrollView.contentInset
         let offset = scrollView.contentOffset
         let minY = -insets.top
@@ -103,29 +122,43 @@ class PostDetailViewController: UIViewController {
     }
     
     func updateWebview() {
-        self.webViewHeightLayoutContraint.constant = self.webView.scrollView.contentSize.height
+        webViewContainerHeightLayoutContraint.constant = webView.scrollView.contentSize.height
         
-        if self.webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding > self.view.bounds.height {
-            self.scrollView.contentSize.height = self.webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding
+        if webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding > self.view.bounds.height {
+            scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding
+            containerHeightLayoutContraint.constant = scrollView.contentSize.height
         }
-        webView.stringByEvaluatingJavaScriptFromString("")
+        
+        println("update \(containerView.frame) ")
+        view.bringSubviewToFront(webView)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ (context) -> Void in
            self.updateWebview()
+           self.containerWidthLayoutContraint.constant = CGRectGetWidth(self.view.bounds)
         }, completion: nil)
+    }
+    
+    func checkWebViewDidFinish() {
+        if webView.scrollView.contentSize.height == 0 {
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * 1.0))
+            
+            dispatch_after(time, dispatch_get_main_queue()) {
+                self.webView(self.webView, didFinishNavigation: nil)
+            }
+        }
     }
 }
 
-extension PostDetailViewController: UIWebViewDelegate {
-    func webViewDidFinishLoad(webView: UIWebView) {
-        println("finish \(webView.scrollView.contentSize.height)")
-
-        updateWebview()
-        
-        println("webview: \(webView.scrollView.contentSize.width) \(scrollView.frame)")
-        KVNProgress.dismiss()
+extension PostDetailViewController: WKNavigationDelegate {
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        if webView.scrollView.contentSize.height == 0 {
+            checkWebViewDidFinish()
+        } else {
+            updateWebview()
+            KVNProgress.dismiss()
+        }
     }
 }
 

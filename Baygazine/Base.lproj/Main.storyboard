@@ -105,34 +105,36 @@
                                                     <constraint firstAttribute="height" constant="1" id="uUr-pM-BUk"/>
                                                 </constraints>
                                             </view>
-                                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTd-b6-Tlt">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vqy-6h-6Am">
                                                 <rect key="frame" x="0.0" y="265" width="600" height="300"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="XBL-Uk-GZ5"/>
+                                                    <constraint firstAttribute="height" constant="300" id="NPn-2E-hKM"/>
                                                 </constraints>
-                                            </webView>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="nTd-b6-Tlt" secondAttribute="trailing" id="0UP-VM-dCc"/>
                                             <constraint firstAttribute="trailing" secondItem="jCg-cV-Vbr" secondAttribute="trailing" constant="20" id="23K-OB-9Ao"/>
                                             <constraint firstAttribute="trailing" secondItem="SfA-Y1-5Kt" secondAttribute="trailing" constant="10" id="68A-ug-Xjy"/>
                                             <constraint firstItem="FFN-WZ-vLU" firstAttribute="top" secondItem="jCg-cV-Vbr" secondAttribute="bottom" constant="10" id="ApF-3e-Xbj"/>
                                             <constraint firstItem="TVE-o2-LNI" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" id="Eq6-No-FTn"/>
                                             <constraint firstItem="Pam-c8-h5H" firstAttribute="top" secondItem="SfA-Y1-5Kt" secondAttribute="bottom" constant="2" id="F7T-d7-Ndq"/>
-                                            <constraint firstItem="nTd-b6-Tlt" firstAttribute="top" secondItem="FFN-WZ-vLU" secondAttribute="bottom" constant="10" id="LED-T7-U3a"/>
+                                            <constraint firstAttribute="height" constant="600" id="KL0-sD-1Wa"/>
                                             <constraint firstItem="Pam-c8-h5H" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" constant="20" id="LrG-1v-caR"/>
                                             <constraint firstItem="YEU-bV-Ol2" firstAttribute="top" secondItem="S0V-T2-x8E" secondAttribute="top" id="M5X-Yr-6bT"/>
                                             <constraint firstAttribute="trailing" secondItem="Pam-c8-h5H" secondAttribute="trailing" constant="20" id="Pk1-CL-SJ9"/>
+                                            <constraint firstAttribute="trailing" secondItem="Vqy-6h-6Am" secondAttribute="trailing" id="SPH-zE-N3J"/>
+                                            <constraint firstItem="Vqy-6h-6Am" firstAttribute="top" secondItem="FFN-WZ-vLU" secondAttribute="bottom" constant="10" id="TB0-nx-Bz4"/>
+                                            <constraint firstItem="Vqy-6h-6Am" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" id="Vp1-SH-zX5"/>
                                             <constraint firstItem="YEU-bV-Ol2" firstAttribute="bottom" secondItem="TVE-o2-LNI" secondAttribute="bottom" id="Vyf-ox-4g6"/>
                                             <constraint firstItem="YEU-bV-Ol2" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" id="Wl0-WJ-oI2"/>
                                             <constraint firstItem="SfA-Y1-5Kt" firstAttribute="bottom" secondItem="YEU-bV-Ol2" secondAttribute="bottom" id="a6n-0S-BES"/>
                                             <constraint firstItem="jCg-cV-Vbr" firstAttribute="top" secondItem="Pam-c8-h5H" secondAttribute="bottom" constant="2" id="c9V-PD-Cmu"/>
                                             <constraint firstAttribute="trailing" secondItem="YEU-bV-Ol2" secondAttribute="trailing" id="i6P-Cv-354"/>
                                             <constraint firstAttribute="trailing" secondItem="FFN-WZ-vLU" secondAttribute="trailing" constant="20" id="iX2-rG-jiY"/>
-                                            <constraint firstItem="nTd-b6-Tlt" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" id="n4u-jS-sUE"/>
                                             <constraint firstItem="SfA-Y1-5Kt" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" constant="10" id="ofo-HL-ZTd"/>
+                                            <constraint firstAttribute="width" constant="600" id="pI5-G0-srd"/>
                                             <constraint firstAttribute="trailing" secondItem="TVE-o2-LNI" secondAttribute="trailing" id="qAW-Ph-h9G"/>
                                             <constraint firstItem="jCg-cV-Vbr" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" constant="20" id="rXf-x1-c4t"/>
                                             <constraint firstItem="FFN-WZ-vLU" firstAttribute="leading" secondItem="S0V-T2-x8E" secondAttribute="leading" constant="20" id="tIu-4Q-fuA"/>
@@ -144,9 +146,7 @@
                                     <constraint firstItem="S0V-T2-x8E" firstAttribute="top" secondItem="pR9-pT-v3t" secondAttribute="top" id="2gL-0s-OwZ"/>
                                     <constraint firstAttribute="bottom" secondItem="S0V-T2-x8E" secondAttribute="bottom" id="3l8-A9-bAp"/>
                                     <constraint firstItem="S0V-T2-x8E" firstAttribute="leading" secondItem="pR9-pT-v3t" secondAttribute="leading" id="I5z-Dx-Ytu"/>
-                                    <constraint firstAttribute="centerX" secondItem="S0V-T2-x8E" secondAttribute="centerX" id="g9I-5w-bLd"/>
                                     <constraint firstAttribute="trailing" secondItem="S0V-T2-x8E" secondAttribute="trailing" id="ijt-8a-L88"/>
-                                    <constraint firstAttribute="centerY" secondItem="S0V-T2-x8E" secondAttribute="centerY" id="o1q-1o-gRF"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -160,15 +160,17 @@
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="Pam-c8-h5H" id="iAN-ul-qdX"/>
+                        <outlet property="containerHeightLayoutContraint" destination="KL0-sD-1Wa" id="cOv-TH-lGH"/>
                         <outlet property="containerView" destination="S0V-T2-x8E" id="cTm-Q1-93T"/>
+                        <outlet property="containerWidthLayoutContraint" destination="pI5-G0-srd" id="Yrk-Tv-qD4"/>
                         <outlet property="dateLabel" destination="jCg-cV-Vbr" id="FUG-41-w2w"/>
                         <outlet property="headerImageView" destination="YEU-bV-Ol2" id="UqU-xs-Z9U"/>
                         <outlet property="headerImageViewHeightLayoutConstraint" destination="6RR-YC-Npv" id="Dep-sB-jJl"/>
                         <outlet property="headerImageViewTopLayoutContraint" destination="M5X-Yr-6bT" id="2Ef-4k-18w"/>
                         <outlet property="scrollView" destination="pR9-pT-v3t" id="mLq-H9-QiE"/>
                         <outlet property="titleLabel" destination="SfA-Y1-5Kt" id="Wcp-s2-TkJ"/>
-                        <outlet property="webView" destination="nTd-b6-Tlt" id="11D-hu-afe"/>
-                        <outlet property="webViewHeightLayoutContraint" destination="XBL-Uk-GZ5" id="MW2-o5-sc0"/>
+                        <outlet property="webViewContainer" destination="Vqy-6h-6Am" id="Nxz-D1-R1i"/>
+                        <outlet property="webViewContainerHeightLayoutContraint" destination="NPn-2E-hKM" id="BHp-c1-WZC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2O-BQ-HKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
