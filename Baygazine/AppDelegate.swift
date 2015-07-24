@@ -21,12 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var newsViewControllers = [UIViewController]()
+    var mainViewControllers = [UIViewController]()
 
     var mainNav: UINavigationController!
     var menuNav: UINavigationController!
     var sidebarVC: SidebarViewController!
-  
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -42,8 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         newsListVC.navigationItem.title = kCategories[0]
         newsListVC.baseURL = kCategoryURLs[0]
         newsListVC.delegate = self
-        newsViewControllers.append(newsListVC)
-        mainNav = UINavigationController(rootViewController: newsViewControllers[0])
+        mainViewControllers.append(newsListVC)
+        mainNav = UINavigationController(rootViewController: mainViewControllers[0])
+        
+        let aboutVC = UIStoryboard.aboutViewController()
+        aboutVC.delegate = self
+        mainViewControllers.append(aboutVC)
         
         let menuVC = UIStoryboard.menuViewController()
         menuVC.delegate = self
@@ -83,6 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: AboutViewControllerDelegate {
+    func aboutViewControllerDidTapMenuButton(controller: AboutViewController) {
+        sidebarVC.toggleLeftMenuAnimated(true)
+    }
+}
+
 extension AppDelegate: NewsListViewControllerDelegate {
     func newsListViewControllerDidTapMenuButton(controller: NewsListViewController) {
         sidebarVC.toggleLeftMenuAnimated(true)
@@ -92,11 +101,21 @@ extension AppDelegate: NewsListViewControllerDelegate {
 extension AppDelegate: MenuViewControllerDelegate {
     func menuViewController(controller: MenuViewController, didSelectRow row: Int) {
         sidebarVC.closeMenuAnimated(true)
+        var viewControllerIndex = 0
 
         if (row < 5) {
-            (newsViewControllers[0] as! NewsListViewController).baseURL = kCategoryURLs[row]
-            (newsViewControllers[0] as! NewsListViewController).navigationItem.title = kCategories[row]
-            (newsViewControllers[0] as! NewsListViewController).handleRefresh()
+            viewControllerIndex = 0
+            (mainViewControllers[0] as! NewsListViewController).baseURL = kCategoryURLs[row]
+            (mainViewControllers[0] as! NewsListViewController).navigationItem.title = kCategories[row]
+            (mainViewControllers[0] as! NewsListViewController).handleRefresh()
+        } else {
+            viewControllerIndex = 1
+            (mainViewControllers[1] as! AboutViewController).navigationItem.title = "關於Baygazine"
+        }
+        
+        let destinationViewController = mainViewControllers[viewControllerIndex]
+        if mainNav.topViewController != destinationViewController {
+            mainNav.setViewControllers([destinationViewController], animated: true)
         }
     }
 }

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,8 +13,15 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xmo-3E-mN5" id="0dH-RG-ZPM">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGB-Ov-3ee">
-                        <rect key="frame" x="150" y="20" width="49" height="60"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-qy-JLV">
+                        <rect key="frame" x="28" y="20" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="bHX-l8-khn"/>
+                            <constraint firstAttribute="height" constant="60" id="jUw-lE-XH0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGB-Ov-3ee">
+                        <rect key="frame" x="118" y="20" width="53" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="A77-CS-1Lt"/>
                         </constraints>
@@ -21,19 +29,12 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-qy-JLV">
-                        <rect key="frame" x="30" y="20" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="bHX-l8-khn"/>
-                            <constraint firstAttribute="height" constant="60" id="jUw-lE-XH0"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="centerY" secondItem="aGB-Ov-3ee" secondAttribute="centerY" constant="-0.25" id="KHD-FV-zNm"/>
-                    <constraint firstItem="aGB-Ov-3ee" firstAttribute="leading" secondItem="2Kl-qy-JLV" secondAttribute="trailing" constant="60" id="Rds-KT-lh9"/>
-                    <constraint firstAttribute="centerY" secondItem="2Kl-qy-JLV" secondAttribute="centerY" constant="-0.25" id="k2w-9d-Hig"/>
-                    <constraint firstItem="2Kl-qy-JLV" firstAttribute="leading" secondItem="0dH-RG-ZPM" secondAttribute="leading" constant="30" id="l0U-5c-QUA"/>
+                    <constraint firstAttribute="centerY" secondItem="aGB-Ov-3ee" secondAttribute="centerY" id="KHD-FV-zNm"/>
+                    <constraint firstItem="aGB-Ov-3ee" firstAttribute="leading" secondItem="2Kl-qy-JLV" secondAttribute="trailing" constant="30" id="alp-jC-XAK"/>
+                    <constraint firstAttribute="centerY" secondItem="2Kl-qy-JLV" secondAttribute="centerY" id="k2w-9d-Hig"/>
+                    <constraint firstItem="2Kl-qy-JLV" firstAttribute="leading" secondItem="0dH-RG-ZPM" secondAttribute="leadingMargin" constant="20" id="tXq-3h-a3p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -10,8 +10,6 @@ pod 'AFNetworking'
 
 use_frameworks!
 
-pod 'RealmSwift'
-
 pod 'SwiftyJSON'
 
 end

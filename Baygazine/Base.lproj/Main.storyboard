@@ -37,6 +37,41 @@
             </objects>
             <point key="canvasLocation" x="-20" y="546"/>
         </scene>
+        <!--About View Controller-->
+        <scene sceneID="GiJ-o7-cMz">
+            <objects>
+                <viewController storyboardIdentifier="AboutViewController" id="6LL-Lr-uFY" customClass="AboutViewController" customModule="Baygazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7cc-jG-YWb"/>
+                        <viewControllerLayoutGuide type="bottom" id="yhY-dk-xO2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SKn-vK-5DK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-wm-sSt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SXa-wm-sSt" firstAttribute="leading" secondItem="SKn-vK-5DK" secondAttribute="leading" id="4AS-oT-Lys"/>
+                            <constraint firstItem="SXa-wm-sSt" firstAttribute="top" secondItem="SKn-vK-5DK" secondAttribute="top" id="C7X-df-sWI"/>
+                            <constraint firstAttribute="bottom" secondItem="SXa-wm-sSt" secondAttribute="bottom" id="SSc-J0-gAt"/>
+                            <constraint firstAttribute="trailing" secondItem="SXa-wm-sSt" secondAttribute="trailing" id="odc-L7-4mm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="aboutTextView" destination="SXa-wm-sSt" id="MHZ-13-VBb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2X-ra-m4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="640" y="546"/>
+        </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="6xR-2i-ryv">
             <objects>

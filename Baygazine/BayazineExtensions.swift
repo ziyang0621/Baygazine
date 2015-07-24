@@ -92,4 +92,8 @@ extension UIStoryboard {
     class func postDetailViewController() -> PostDetailViewController {
         return mainStoryboard().instantiateViewControllerWithIdentifier("PostDetailViewController") as! PostDetailViewController
     }
+    
+    class func aboutViewController() -> AboutViewController {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("AboutViewController") as! AboutViewController
+    }
 }

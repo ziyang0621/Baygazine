@@ -14,16 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Baygazine-Realm.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Baygazine-RealmSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Baygazine-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>31E4BFF881A921D931D95F94</key>
+		<key>60C954212A176C55C05CB406</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>405A8A26E31244B662578AB1</key>
+		<key>D3B4F6C91E38CF1BE0F2FFFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>67779F6DAF64A3462B3468A9</key>
+		<key>D887FF9C20BDADC879F86F17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>711F2EC29302CB5302DFBC49</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A6962F92FC89A25C0D78C5D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BF73B66211EF33570EE86808</key>
+		<key>E7958C86F2656ACBEC23AE4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
