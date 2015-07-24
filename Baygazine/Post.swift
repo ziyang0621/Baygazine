@@ -23,15 +23,14 @@ class Post: NSObject {
     
     init(json: JSON) {
         id = json["id"].int
-        url = json["url"].string
+        url = json["string"].string?.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         title = String(htmlEncodedString: json["title"].string!)
-     //   title = json["title"].string
         attachments = [Attachment]()
         for index in 0..<json["attachments"].array!.count {
             let attachment = Attachment(json: json["attachments"][index])
             attachments?.append(attachment)
         }
-        thumbnailUrl = json["attachments"][0]["url"].string
+        thumbnailUrl = json["attachments"][0]["url"].string?.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         author = Author(json: json["author"])
         content = json["content"].string
         excerpt = json["excerpt"].string

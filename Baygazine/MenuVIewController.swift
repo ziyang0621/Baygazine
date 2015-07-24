@@ -20,6 +20,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = "Baygazine!"
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: "MenuCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
@@ -40,7 +41,8 @@ extension MenuViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as! MenuCell
-        cell.menuText = "test"
+        cell.menuText = kCategories[indexPath.row]
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
 }

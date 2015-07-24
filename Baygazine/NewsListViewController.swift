@@ -10,6 +10,10 @@ import SwiftyJSON
 import AFNetworking
 import KVNProgress
 
+protocol NewsListViewControllerDelegate: class {
+    func newsListViewControllerDidTapMenuButton(controller: NewsListViewController)
+}
+
 class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -17,12 +21,15 @@ class NewsListViewController: UIViewController {
     var populatingPosts = false
     var posts = [Post]()
     let refreshControl = UIRefreshControl()
+    var baseURL: String!
+    weak var delegate: NewsListViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "生活"
-        
+        let leftMenuButton = UIBarButtonItem(image: UIImage(named: "MenuIcon"), style: .Plain, target: self, action: "menuTapped")
+        navigationItem.leftBarButtonItem = leftMenuButton
+                
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
@@ -33,6 +40,14 @@ class NewsListViewController: UIViewController {
         tableView.addSubview(refreshControl)
         
         populatePosts()
+    }
+    
+    func menuTapped() {
+        delegate?.newsListViewControllerDidTapMenuButton(self)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,14 +72,13 @@ class NewsListViewController: UIViewController {
         populatePosts()
     }
     
-    
     func populatePosts() {
         if populatingPosts {
             return
         }
         
         populatingPosts = true
-        let getPostsURL = "http://baygazine.com/category/life-style/?json=1&count=8&page=\(currentPage)"
+        let getPostsURL = "\(baseURL)&count=8&page=\(currentPage)"
         let request = NSURLRequest(URL: NSURL(string: getPostsURL)!)
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {
@@ -114,6 +128,8 @@ extension NewsListViewController: UITableViewDataSource {
             cell.thumbnailImageView.addSubview(activityIndicator)
             activityIndicator.center = cell.thumbnailImageView.center
             activityIndicator.startAnimating()
+          //  let testURL = NSURL(string: thumbnailURL)!
+            println("thumbnail URL: \(thumbnailURL)")
             let request = NSURLRequest(URL: NSURL(string: thumbnailURL)!)
             cell.thumbnailImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
                 (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in

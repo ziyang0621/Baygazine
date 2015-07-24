@@ -9,6 +9,12 @@
 import UIKit
 
 let kThemeColor = UIColor.colorWithRGBHex(0x0D72A8, alpha: 1.0)
+let kCategoryURLs = ["http://baygazine.com/category/life-style/?json=1",
+    "http://baygazine.com/category/eat-and-drink/?json=1",
+    "http://baygazine.com/category/news-and-politics/?json=1",
+    "http://baygazine.com/category/column/?json=1",
+    "http://baygazine.com/category/contribution/?json=1"]
+let kCategories = ["生活", "飲食", "新聞及政治", "專欄", "讀者投稿"]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mainNav: UINavigationController!
     var menuNav: UINavigationController!
     var sidebarVC: SidebarViewController!
+  
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -32,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().translucent = true
 
         let newsListVC = UIStoryboard.newsListViewController()
+        newsListVC.navigationItem.title = kCategories[0]
+        newsListVC.baseURL = kCategoryURLs[0]
+        newsListVC.delegate = self
         newsViewControllers.append(newsListVC)
         mainNav = UINavigationController(rootViewController: newsViewControllers[0])
         
@@ -73,8 +83,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: NewsListViewControllerDelegate {
+    func newsListViewControllerDidTapMenuButton(controller: NewsListViewController) {
+        sidebarVC.toggleLeftMenuAnimated(true)
+    }
+}
+
 extension AppDelegate: MenuViewControllerDelegate {
     func menuViewController(controller: MenuViewController, didSelectRow row: Int) {
-        println("menu vc delegate called")
+        sidebarVC.closeMenuAnimated(true)
+
+        if (row < 5) {
+            (newsViewControllers[0] as! NewsListViewController).baseURL = kCategoryURLs[row]
+            (newsViewControllers[0] as! NewsListViewController).navigationItem.title = kCategories[row]
+            (newsViewControllers[0] as! NewsListViewController).handleRefresh()
+        }
     }
 }
