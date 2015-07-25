@@ -75,7 +75,7 @@ class NewsListViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.loadingInfoView.alpha = 1
             self.loadingIndicator.alpha = 0
-            self.loadLabel.text = "沒有更多文章"
+            self.loadLabel.text = "所有文章讀取"
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 self.loadingInfoView.alpha = 0
             })
@@ -116,7 +116,7 @@ class NewsListViewController: UIViewController {
         
         if currentPage > totalPages && totalPages != 0{
             showAllPostsLoaded()
-            self.populatingPosts = false
+            populatingPosts = false
             return
         }
         

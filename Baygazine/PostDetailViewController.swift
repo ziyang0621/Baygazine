@@ -10,7 +10,7 @@ import UIKit
 import KVNProgress
 import WebKit
 
-private let kHeaderViewHeight: CGFloat = 200.0
+private let kHeaderViewHeight: CGFloat = 300.0
 private let kBottmPadding: CGFloat = 100.0
 
 class PostDetailViewController: UIViewController {
@@ -28,6 +28,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var webViewContainer: UIView!
     var webView: WKWebView!
+    var blurViewContainer: UIView!
     var post: Post?
     var thumbnailImage: UIImage?
     var headerViewFrame: CGRect!
@@ -35,6 +36,7 @@ class PostDetailViewController: UIViewController {
     var didLayoutSubviews = false
     var headerImageViewFrame: CGRect!
     var containerViewFrame: CGRect!
+    var navBarHeight: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +46,12 @@ class PostDetailViewController: UIViewController {
         headerImageViewFrame = headerImageView.frame
         maximumStretchHeight = CGRectGetWidth(scrollView.bounds)
         containerViewFrame = containerView.frame
-        
-        println("view did load \(containerView.frame)")
-        
         containerHeightLayoutContraint.constant = CGRectGetHeight(view.bounds)
         containerWidthLayoutContraint.constant = CGRectGetWidth(view.bounds)
+        navBarHeight = CGRectGetHeight(navigationController!.navigationBar.frame)
         
-        KVNProgress.showWithStatus("Loading...", onView: navigationController?.view)
+        KVNProgress.showWithStatus("讀取中...", onView: navigationController?.view)
+        
         loadArticle()
     }
     
@@ -63,18 +64,28 @@ class PostDetailViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    func loadArticle() {
-        if let thumbnailImage = thumbnailImage {
-            headerImageView.image = thumbnailImage
-        } else {
-            headerImageView.image = UIColor.imageWithColor(kThemeColor)
-        }
-        titleLabel.text = post!.title!
-        authorLabel.textColor = kThemeColor
-        authorLabel.text = "by \(post!.author!.nickName!)"
-        dateLabel.textColor = UIColor.darkGrayColor()
-        dateLabel.text = post!.createdDate!
+    func setupBlurView() {
+        blurViewContainer = UIView(frame: CGRectZero)
+        blurViewContainer.backgroundColor = UIColor.clearColor()
+        headerImageView.addSubview(blurViewContainer)
+        blurViewContainer.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let blurViewContainerTopContraint = NSLayoutConstraint(item: blurViewContainer, attribute: .Top, relatedBy: .Equal, toItem: headerImageView, attribute: .Top, multiplier: 1, constant: 0)
+        let blurViewwContainerBottomContraint = NSLayoutConstraint(item: blurViewContainer, attribute: .Bottom, relatedBy: .Equal, toItem: headerImageView, attribute: .Bottom, multiplier: 1, constant: 0)
+        let blurViewwContainerLeftContraint = NSLayoutConstraint(item: blurViewContainer, attribute: .Left, relatedBy: .Equal, toItem: headerImageView, attribute: .Left, multiplier: 1, constant: 0)
+        let blurViewwContainerRightContraint = NSLayoutConstraint(item: blurViewContainer, attribute: .Right, relatedBy: .Equal, toItem: headerImageView, attribute: .Right, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activateConstraints([blurViewContainerTopContraint, blurViewwContainerBottomContraint, blurViewwContainerLeftContraint, blurViewwContainerRightContraint])
         
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        blurViewContainer.addSubview(blurView)
+        blurView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let blurViewTopContraint = NSLayoutConstraint(item: blurView, attribute: .Top, relatedBy: .Equal, toItem: blurViewContainer, attribute: .Top, multiplier: 1, constant: 0)
+        let blurViewBottomContraint = NSLayoutConstraint(item: blurView, attribute: .Bottom, relatedBy: .Equal, toItem: blurViewContainer, attribute: .Bottom, multiplier: 1, constant: 0)
+        let blurViewLeftContraint = NSLayoutConstraint(item: blurView, attribute: .Left, relatedBy: .Equal, toItem: blurViewContainer, attribute: .Left, multiplier: 1, constant: 0)
+        let blurViewRightContraint = NSLayoutConstraint(item: blurView, attribute: .Right, relatedBy: .Equal, toItem: blurViewContainer, attribute: .Right, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activateConstraints([blurViewTopContraint, blurViewBottomContraint, blurViewLeftContraint, blurViewRightContraint])
+    }
+    
+    func setupWebview() {
         webView = WKWebView(frame: CGRectZero)
         webViewContainer.addSubview(webView)
         webView.navigationDelegate = self
@@ -84,11 +95,28 @@ class PostDetailViewController: UIViewController {
         let bottomConstraint = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: webViewContainer, attribute: .Bottom, multiplier: 1, constant: 0)
         let leftConstraint = NSLayoutConstraint(item: webView, attribute: .Left, relatedBy: .Equal, toItem: webViewContainer, attribute: .Left, multiplier: 1, constant: 0)
         let rightConstraint = NSLayoutConstraint(item: webView, attribute: .Right, relatedBy: .Equal, toItem: webViewContainer, attribute: .Right, multiplier: 1, constant: 0)
-
+        
         NSLayoutConstraint.activateConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
         
         let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default} body{font-size:200%}</style>"
         webView.loadHTMLString(styleString + post!.content! + post!.excerpt!, baseURL: nil)
+    }
+    
+    func loadArticle() {
+        titleLabel.text = post!.title!
+        authorLabel.textColor = kThemeColor
+        authorLabel.text = "by \(post!.author!.nickName!)"
+        dateLabel.textColor = UIColor.darkGrayColor()
+        dateLabel.text = post!.createdDate!
+        
+        if let thumbnailImage = thumbnailImage {
+            headerImageView.image = thumbnailImage
+        } else {
+            headerImageView.image = UIColor.imageWithColor(kThemeColor)
+        }
+        setupBlurView()
+        
+        setupWebview()
     }
   
     override func viewDidLayoutSubviews() {
@@ -130,7 +158,6 @@ class PostDetailViewController: UIViewController {
         }
         
         println("update \(containerView.frame) ")
-        view.bringSubviewToFront(webView)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -164,6 +191,14 @@ extension PostDetailViewController: WKNavigationDelegate {
 
 extension PostDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        println("did scroll: \(scrollView.contentInset.top) \(scrollView.contentOffset.y)")
+        if scrollView.contentOffset.y > 0 {
+            let percent: CGFloat = fabs(scrollView.contentOffset.y / (kHeaderViewHeight - navBarHeight))
+            println("percent \(percent)")
+            blurViewContainer.alpha = percent * 3
+        } else {
+            blurViewContainer.alpha = 0
+        }
         if didLayoutSubviews {
             updateHeaderImageView()
         }
