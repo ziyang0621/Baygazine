@@ -104,10 +104,13 @@ class PostDetailViewController: UIViewController {
     
     func loadArticle() {
         titleLabel.text = post!.title!
+        titleLabel.layer.opacity = 0
         authorLabel.textColor = kThemeColor
-        authorLabel.text = "by \(post!.author!.nickName!)"
+        authorLabel.text = "by \(post!.author!.name!)"
+        authorLabel.layer.opacity = 0
         dateLabel.textColor = UIColor.darkGrayColor()
         dateLabel.text = post!.createdDate!
+        dateLabel.layer.opacity = 0
         
         if let thumbnailImage = thumbnailImage {
             headerImageView.image = thumbnailImage
@@ -176,6 +179,49 @@ class PostDetailViewController: UIViewController {
             }
         }
     }
+    
+    func labelAnimations() {
+        let titleGroup = CAAnimationGroup()
+        titleGroup.beginTime = CACurrentMediaTime() + 0.3
+        titleGroup.duration = 0.5
+        titleGroup.fillMode = kCAFillModeBackwards
+        titleGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        
+        let scaleDown = CABasicAnimation(keyPath: "transform.scale")
+        scaleDown.fromValue = 5.0
+        scaleDown.toValue = 1.0
+        
+        let fade = CABasicAnimation(keyPath: "opacity")
+        fade.fromValue = 0.0
+        fade.toValue = 1.0
+        
+        titleGroup.animations = [scaleDown, fade]
+        titleLabel.layer.addAnimation(titleGroup, forKey: nil)
+        titleLabel.layer.opacity = 1
+        
+        let labelGroup = CAAnimationGroup()
+        labelGroup.duration = 0.5
+        labelGroup.fillMode = kCAFillModeBackwards
+        
+        let flyRight = CABasicAnimation(keyPath: "position.x")
+        flyRight.fromValue = -view.bounds.size.width/2
+        flyRight.toValue = view.bounds.size.width/2
+        
+        let fadeFieldIn = CABasicAnimation(keyPath: "opacity")
+        fadeFieldIn.fromValue = 0.25
+        fadeFieldIn.toValue = 1.0
+        
+        labelGroup.animations = [flyRight, fadeFieldIn]
+        
+        labelGroup.beginTime = CACurrentMediaTime() + 0.6
+        authorLabel.layer.addAnimation(labelGroup, forKey: nil)
+        authorLabel.layer.opacity = 1
+        
+        labelGroup.beginTime = CACurrentMediaTime() + 0.7
+        dateLabel.layer.addAnimation(labelGroup, forKey: nil)
+        dateLabel.layer.opacity = 1
+
+    }
 }
 
 extension PostDetailViewController: WKNavigationDelegate {
@@ -185,13 +231,13 @@ extension PostDetailViewController: WKNavigationDelegate {
         } else {
             updateWebview()
             KVNProgress.dismiss()
+            labelAnimations()
         }
     }
 }
 
 extension PostDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println("did scroll: \(scrollView.contentInset.top) \(scrollView.contentOffset.y)")
         if scrollView.contentOffset.y > 0 {
             let percent: CGFloat = fabs(scrollView.contentOffset.y / (kHeaderViewHeight - navBarHeight))
             println("percent \(percent)")
