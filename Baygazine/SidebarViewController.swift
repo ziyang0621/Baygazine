@@ -105,10 +105,6 @@ class SidebarViewController: UIViewController {
         return scrollView.contentOffset.x == 0
     }
     
-    func rightMenuIsOpen() -> Bool {
-        return scrollView.contentOffset.x == CGRectGetWidth(scrollView.frame) * 2
-    }
-    
     func openLeftMenuAnimated(animated: Bool) {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: animated)
     }
@@ -141,10 +137,7 @@ extension SidebarViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let tapLocation = touch.locationInView(view)
         let tapWasInRightOverlapArea = tapLocation.x >= CGRectGetWidth(view.bounds) - overlap
-        let tapWasInLeftOverlapArea = tapLocation.x <= overlap
         
-        return
-            (tapWasInRightOverlapArea && leftMenuIsOpen()) ||
-                (tapWasInLeftOverlapArea && rightMenuIsOpen())
+        return (tapWasInRightOverlapArea && leftMenuIsOpen())
     }
 }
