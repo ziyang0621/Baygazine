@@ -129,5 +129,69 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Baygazine/NewsListViewController.swift"
+            timestampString = "459492417.870648"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "hideLoading()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Baygazine.NewsListViewController.hideLoading (Baygazine.NewsListViewController)() -&gt; ()"
+                  moduleName = "Baygazine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ziyang0621/iOSApplications/Baygazine/Baygazine/NewsListViewController.swift"
+                  timestampString = "459487751.237533"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Baygazine.NewsListViewController.(hideLoading (Baygazine.NewsListViewController) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "Baygazine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ziyang0621/iOSApplications/Baygazine/Baygazine/NewsListViewController.swift"
+                  timestampString = "459487751.237676"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Baygazine/NewsListViewController.swift"
+            timestampString = "459492417.870648"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "hideLoading()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -11,7 +11,7 @@ import KVNProgress
 import WebKit
 
 private let kHeaderViewHeight: CGFloat = 200.0
-private let kBottmPadding: CGFloat = 50.0
+private let kBottmPadding: CGFloat = 100.0
 
 class PostDetailViewController: UIViewController {
 

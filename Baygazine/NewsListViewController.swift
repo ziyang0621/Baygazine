@@ -17,7 +17,11 @@ protocol NewsListViewControllerDelegate: class {
 class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loadingInfoView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadLabel: UILabel!
     var currentPage = 1
+    var totalPages = 0
     var populatingPosts = false
     var posts = [Post]()
     let refreshControl = UIRefreshControl()
@@ -39,11 +43,43 @@ class NewsListViewController: UIViewController {
         refreshControl.addTarget(self, action: "handleRefresh", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
+        loadingInfoView.alpha = 0
+        loadingIndicator.startAnimating()
+        
         populatePosts()
     }
     
     func menuTapped() {
         delegate?.newsListViewControllerDidTapMenuButton(self)
+    }
+    
+    func showLoading() {
+        dispatch_async(dispatch_get_main_queue()) {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.loadingInfoView.alpha = 1
+                self.loadingIndicator.alpha = 1
+                self.loadLabel.text = "正在讀取文章"
+            })
+        }
+    }
+    
+    func hideLoading() {
+        dispatch_async(dispatch_get_main_queue()) {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.loadingInfoView.alpha = 0
+            })
+        }
+    }
+    
+    func showAllPostsLoaded() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.loadingInfoView.alpha = 1
+            self.loadingIndicator.alpha = 0
+            self.loadLabel.text = "沒有更多文章"
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.loadingInfoView.alpha = 0
+            })
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,6 +102,7 @@ class NewsListViewController: UIViewController {
         
         posts.removeAll(keepCapacity: false)
         self.currentPage = 1
+        self.totalPages = 0
         
         tableView.reloadData()
         
@@ -77,6 +114,13 @@ class NewsListViewController: UIViewController {
             return
         }
         
+        if currentPage > totalPages && totalPages != 0{
+            showAllPostsLoaded()
+            self.populatingPosts = false
+            return
+        }
+        
+        showLoading()
         populatingPosts = true
         let getPostsURL = "\(baseURL)&count=8&page=\(currentPage)"
         let request = NSURLRequest(URL: NSURL(string: getPostsURL)!)
@@ -87,8 +131,8 @@ class NewsListViewController: UIViewController {
             println("request end")
             if error == nil {
                 let json = JSON(data: data)
-                let totalPages = json["pages"].int
-                if self.currentPage <= totalPages {
+                self.totalPages = json["pages"].int!
+                if self.currentPage <= self.totalPages {
                     let lastItem = self.posts.count
                     for index in 0..<json["posts"].arrayValue.count {
                         let newPost = Post(json: json["posts"][index])
@@ -103,6 +147,7 @@ class NewsListViewController: UIViewController {
             } else {
                 println(error.userInfo?["error"] as? String)
             }
+            self.hideLoading()
             self.populatingPosts = false
         }).resume()
     }
@@ -128,8 +173,6 @@ extension NewsListViewController: UITableViewDataSource {
             cell.thumbnailImageView.addSubview(activityIndicator)
             activityIndicator.center = cell.thumbnailImageView.center
             activityIndicator.startAnimating()
-          //  let testURL = NSURL(string: thumbnailURL)!
-            println("thumbnail URL: \(thumbnailURL)")
             let request = NSURLRequest(URL: NSURL(string: thumbnailURL)!)
             cell.thumbnailImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
                 (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
