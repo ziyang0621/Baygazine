@@ -10,8 +10,8 @@ import UIKit
 
 class MenuCell: UITableViewCell {
 
-    @IBOutlet private weak var menuImage: UIImageView!
-    @IBOutlet private weak var menuLabel: UILabel!
+    @IBOutlet weak var menuImageView: UIImageView!
+    @IBOutlet weak var menuLabel: UILabel!
 
     var menuText: String? {
         didSet {

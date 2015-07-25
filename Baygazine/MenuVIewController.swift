@@ -45,8 +45,9 @@ extension MenuViewController: UITableViewDataSource {
         if indexPath.row < 5 {
             cell.menuText = kCategories[indexPath.row]
         } else {
-            cell.menuText = "關於Baygazine"
+            cell.menuText = "關於Baygazine!"
         }
+        cell.menuImageView.image = UIImage(named: kCategoryImageNames[indexPath.row])?.newImageWithColor(kThemeColor)
         return cell
     }
 }

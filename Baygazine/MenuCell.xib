@@ -38,7 +38,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="menuImage" destination="2Kl-qy-JLV" id="sAb-Ee-x6s"/>
+                <outlet property="menuImageView" destination="2Kl-qy-JLV" id="DZ3-7W-I62"/>
                 <outlet property="menuLabel" destination="aGB-Ov-3ee" id="zS9-kB-8cD"/>
             </connections>
             <point key="canvasLocation" x="272" y="178"/>

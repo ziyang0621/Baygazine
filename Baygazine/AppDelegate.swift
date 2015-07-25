@@ -15,6 +15,7 @@ let kCategoryURLs = ["http://baygazine.com/category/life-style/?json=1",
     "http://baygazine.com/category/column/?json=1",
     "http://baygazine.com/category/contribution/?json=1"]
 let kCategories = ["生活", "飲食", "新聞及政治", "專欄", "讀者投稿"]
+let kCategoryImageNames = ["LifeStyle", "Drink", "Political", "Column", "Reader", "About"]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
