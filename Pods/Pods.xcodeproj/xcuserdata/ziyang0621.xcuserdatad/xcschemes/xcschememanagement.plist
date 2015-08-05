@@ -4,17 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Baygazine-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Baygazine-KVNProgress.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Baygazine-SwiftyJSON.xcscheme</key>
+		<key>KVNProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,25 +19,40 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>60C954212A176C55C05CB406</key>
+		<key>34CD3E999620406DEE7E9498DC81DEAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3B4F6C91E38CF1BE0F2FFFB</key>
+		<key>3DA374BB5346C86BB9E37D7D8A3F9705</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D887FF9C20BDADC879F86F17</key>
+		<key>A10DC834303207C2047F9CFC14B492E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7958C86F2656ACBEC23AE4E</key>
+		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BD504C776E507562328F815231C53ECF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

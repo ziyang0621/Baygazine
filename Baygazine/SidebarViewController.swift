@@ -17,6 +17,7 @@ class SidebarViewController: UIViewController {
     var overlap: CGFloat!
     var scrollView: UIScrollView!
     var firstTime = true
+    var viewDidAppear = false
     
     required init(coder aDecoder: NSCoder) {
         assert(false, "Use init(leftViewController:mainViewController:overlap:)")
@@ -43,12 +44,22 @@ class SidebarViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        viewDidAppear = true
+    }
+    
+    deinit {
+        scrollView.delegate = nil
+    }
+    
     func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.pagingEnabled = true
         scrollView.bounces = false
         scrollView.clipsToBounds = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
         scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addSubview(scrollView)
         
@@ -99,6 +110,7 @@ class SidebarViewController: UIViewController {
     
     func closeMenuAnimated(animated: Bool) {
         scrollView.setContentOffset(CGPoint(x: CGRectGetWidth(scrollView.frame), y: 0), animated: animated)
+        setToPercent(0)
     }
     
     func leftMenuIsOpen() -> Bool {
@@ -107,6 +119,7 @@ class SidebarViewController: UIViewController {
     
     func openLeftMenuAnimated(animated: Bool) {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: animated)
+        setToPercent(1)
     }
     
     func toggleLeftMenuAnimated(animated: Bool) {
@@ -115,6 +128,7 @@ class SidebarViewController: UIViewController {
         } else {
             openLeftMenuAnimated(animated)
         }
+        
     }
     
     private func addViewController(viewController: UIViewController) {
@@ -130,6 +144,43 @@ class SidebarViewController: UIViewController {
         destView.layer.shadowOffset = CGSize(width: 0, height: 0)
         destView.layer.shadowOpacity = 1.0
         destView.layer.shadowColor = UIColor.blackColor().CGColor
+    }
+    
+    private func setToPercent(percent: CGFloat) {
+        
+        let vc = (mainViewController as! UINavigationController).viewControllers.first as! UIViewController
+        
+        if vc.isKindOfClass(NewsListViewController) {
+            if let menuButton =  (vc as! NewsListViewController).menuButton {
+                menuButton.imageView.layer.transform = buttonTransformForPercent(percent)
+            }
+        } else if vc.isKindOfClass(AboutViewController) {
+            if let menuButton =  (vc as! AboutViewController).menuButton {
+                menuButton.imageView.layer.transform = buttonTransformForPercent(percent)
+            }
+        }
+    }
+    
+    
+    private func buttonTransformForPercent(percent: CGFloat) -> CATransform3D {
+        
+        var identity = CATransform3DIdentity
+        identity.m34 = -1.0/1000
+        
+        let angle = percent * CGFloat(-M_PI)
+        let rotationTransform = CATransform3DRotate(identity, angle, 1.0, 1.0, 0.0)
+        
+        return rotationTransform
+    }
+}
+
+extension SidebarViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if viewDidAppear {
+            let width = CGRectGetWidth(leftViewController.view.frame)
+            let percent = (scrollView.contentOffset.x - width) / width
+            setToPercent(percent)
+        }
     }
 }
 

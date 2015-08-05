@@ -111,7 +111,7 @@ extension AppDelegate: MenuViewControllerDelegate {
             (mainViewControllers[0] as! NewsListViewController).handleRefresh()
         } else {
             viewControllerIndex = 1
-            (mainViewControllers[1] as! AboutViewController).navigationItem.title = "關於Baygazine"
+            (mainViewControllers[1] as! AboutViewController).navigationItem.title = "關於Baygazine!"
         }
         
         let destinationViewController = mainViewControllers[viewControllerIndex]

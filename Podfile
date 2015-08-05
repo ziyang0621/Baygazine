@@ -8,6 +8,8 @@ pod 'KVNProgress'
 
 pod 'AFNetworking'
 
+pod 'pop'
+
 use_frameworks!
 
 pod 'SwiftyJSON'

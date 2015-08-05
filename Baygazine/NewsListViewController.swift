@@ -27,13 +27,17 @@ class NewsListViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     var baseURL: String!
     weak var delegate: NewsListViewControllerDelegate?
+    var menuButton: MenuButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftMenuButton = UIBarButtonItem(image: UIImage(named: "MenuIcon"), style: .Plain, target: self, action: "menuTapped")
-        navigationItem.leftBarButtonItem = leftMenuButton
-                
+        menuButton = MenuButton()
+        menuButton.tapHandler = {
+            delegate?.newsListViewControllerDidTapMenuButton(self)
+        }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerNib(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
@@ -47,10 +51,6 @@ class NewsListViewController: UIViewController {
         loadingIndicator.startAnimating()
         
         populatePosts()
-    }
-    
-    func menuTapped() {
-        delegate?.newsListViewControllerDidTapMenuButton(self)
     }
     
     func showLoading() {

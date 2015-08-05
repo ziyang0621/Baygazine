@@ -21,16 +21,19 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - KVNProgress (2.2.1)
+  - pop (1.0.7)
   - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - KVNProgress
+  - pop
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   KVNProgress: 7001d2d16a2755cee5599e8e485befe056f2197b
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2
