@@ -11,7 +11,7 @@ import KVNProgress
 import WebKit
 
 private let kHeaderViewHeight: CGFloat = 300.0
-private let kBottmPadding: CGFloat = 100.0
+private let kBottomPadding: CGFloat = 100.0
 
 class PostDetailViewController: UIViewController {
 
@@ -92,14 +92,14 @@ class PostDetailViewController: UIViewController {
         
         webView.setTranslatesAutoresizingMaskIntoConstraints(false)
         let topConstraint = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: webViewContainer, attribute: .Top, multiplier: 1, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: webViewContainer, attribute: .Bottom, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: webView, attribute: .Height, relatedBy: .Equal, toItem: webViewContainer, attribute: .Height, multiplier: 1, constant: 0)
         let leftConstraint = NSLayoutConstraint(item: webView, attribute: .Left, relatedBy: .Equal, toItem: webViewContainer, attribute: .Left, multiplier: 1, constant: 0)
         let rightConstraint = NSLayoutConstraint(item: webView, attribute: .Right, relatedBy: .Equal, toItem: webViewContainer, attribute: .Right, multiplier: 1, constant: 0)
         
-        NSLayoutConstraint.activateConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+        NSLayoutConstraint.activateConstraints([topConstraint, heightConstraint, leftConstraint, rightConstraint])
         
-        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default} body{font-size:200%}</style>"
-        webView.loadHTMLString(styleString + post!.content! + post!.excerpt!, baseURL: nil)
+        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default} body{font-size:250%}</style>"
+        webView.loadHTMLString(styleString + post!.content!, baseURL: nil)
     }
     
     func loadArticle() {
@@ -155,12 +155,15 @@ class PostDetailViewController: UIViewController {
     func updateWebview() {
         webViewContainerHeightLayoutContraint.constant = webView.scrollView.contentSize.height
         
-        if webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding > self.view.bounds.height {
-            scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + kBottmPadding
+        if webView.scrollView.contentSize.height + kHeaderViewHeight + kBottomPadding > self.view.bounds.height {
+            scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + 64 + kBottomPadding
             containerHeightLayoutContraint.constant = scrollView.contentSize.height
         }
         
-        println("update \(containerView.frame) ")
+        view.updateConstraints()
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

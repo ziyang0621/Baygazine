@@ -140,8 +140,8 @@
                                                     <constraint firstAttribute="height" constant="1" id="uUr-pM-BUk"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vqy-6h-6Am">
-                                                <rect key="frame" x="0.0" y="365" width="600" height="300"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vqy-6h-6Am">
+                                                <rect key="frame" x="0.0" y="363" width="600" height="300"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="NPn-2E-hKM"/>
