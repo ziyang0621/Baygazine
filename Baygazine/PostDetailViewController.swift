@@ -9,6 +9,7 @@
 import UIKit
 import KVNProgress
 import WebKit
+import pop
 
 private let kHeaderViewHeight: CGFloat = 300.0
 private let kBottomPadding: CGFloat = 100.0
@@ -33,13 +34,21 @@ class PostDetailViewController: UIViewController {
     var thumbnailImage: UIImage?
     var headerViewFrame: CGRect!
     var maximumStretchHeight: CGFloat?
-    var didLayoutSubviews = false
+    var viewDidAppear = false
     var headerImageViewFrame: CGRect!
     var containerViewFrame: CGRect!
     var navBarHeight: CGFloat!
+    var didLabelAnimatinons = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        if let nav = navigationController {
+            println("has nav")
+        }
+      
+        let leftBarButton = UIBarButtonItem(image: UIImage(named: "IconClose"), style: .Plain, target: self, action: "close")
+        navigationItem.leftBarButtonItem = leftBarButton
         
         scrollView.delegate = self
         headerImageView.clipsToBounds = true
@@ -50,9 +59,13 @@ class PostDetailViewController: UIViewController {
         containerWidthLayoutContraint.constant = CGRectGetWidth(view.bounds)
         navBarHeight = CGRectGetHeight(navigationController!.navigationBar.frame)
         
-        KVNProgress.showWithStatus("讀取中...", onView: navigationController?.view)
-        
         loadArticle()
+        
+    }
+    
+    func close() {
+      //  dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     deinit {
@@ -88,7 +101,9 @@ class PostDetailViewController: UIViewController {
     func setupWebview() {
         webView = WKWebView(frame: CGRectZero)
         webViewContainer.addSubview(webView)
+        webViewContainer.alpha = 0
         webView.navigationDelegate = self
+        webView.scrollView.scrollEnabled = false
         
         webView.setTranslatesAutoresizingMaskIntoConstraints(false)
         let topConstraint = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: webViewContainer, attribute: .Top, multiplier: 1, constant: 0)
@@ -98,7 +113,7 @@ class PostDetailViewController: UIViewController {
         
         NSLayoutConstraint.activateConstraints([topConstraint, heightConstraint, leftConstraint, rightConstraint])
         
-        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default} body{font-size:250%}</style>"
+        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:250%;padding:2% 2% 2% 2%}</style>"
         webView.loadHTMLString(styleString + post!.content!, baseURL: nil)
     }
     
@@ -125,12 +140,11 @@ class PostDetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         println("did layout")
-        didLayoutSubviews = true
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        println("did appear")
+        viewDidAppear = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -155,14 +169,15 @@ class PostDetailViewController: UIViewController {
     func updateWebview() {
         webViewContainerHeightLayoutContraint.constant = webView.scrollView.contentSize.height
         
-        if webView.scrollView.contentSize.height + kHeaderViewHeight + kBottomPadding > self.view.bounds.height {
-            scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + 64 + kBottomPadding
-            containerHeightLayoutContraint.constant = scrollView.contentSize.height
-        }
+        scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + navBarHeight + kBottomPadding + CGRectGetHeight(navigationController!.view.bounds)
+        containerHeightLayoutContraint.constant = scrollView.contentSize.height
+        
+        println("height :\(scrollView.contentSize.height) \(CGRectGetHeight(navigationController!.view.bounds))")
         
         view.updateConstraints()
         UIView.animateWithDuration(1.0, animations: { () -> Void in
             self.view.layoutIfNeeded()
+            self.webViewContainer.alpha = 1
         })
     }
     
@@ -170,6 +185,10 @@ class PostDetailViewController: UIViewController {
         coordinator.animateAlongsideTransition({ (context) -> Void in
            self.updateWebview()
            self.containerWidthLayoutContraint.constant = CGRectGetWidth(self.view.bounds)
+            self.view.updateConstraints()
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
         }, completion: nil)
     }
     
@@ -184,57 +203,60 @@ class PostDetailViewController: UIViewController {
     }
     
     func labelAnimations() {
-        let titleGroup = CAAnimationGroup()
-        titleGroup.beginTime = CACurrentMediaTime() + 0.3
-        titleGroup.duration = 0.5
-        titleGroup.fillMode = kCAFillModeBackwards
-        titleGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         
-        let scaleDown = CABasicAnimation(keyPath: "transform.scale")
-        scaleDown.fromValue = 5.0
-        scaleDown.toValue = 1.0
-        
-        let fade = CABasicAnimation(keyPath: "opacity")
-        fade.fromValue = 0.0
-        fade.toValue = 1.0
-        
-        titleGroup.animations = [scaleDown, fade]
-        titleLabel.layer.addAnimation(titleGroup, forKey: nil)
-        titleLabel.layer.opacity = 1
-        
-        let labelGroup = CAAnimationGroup()
-        labelGroup.duration = 0.5
-        labelGroup.fillMode = kCAFillModeBackwards
-        
-        let flyRight = CABasicAnimation(keyPath: "position.x")
-        flyRight.fromValue = -view.bounds.size.width/2
-        flyRight.toValue = view.bounds.size.width/2
-        
-        let fadeFieldIn = CABasicAnimation(keyPath: "opacity")
-        fadeFieldIn.fromValue = 0.25
-        fadeFieldIn.toValue = 1.0
-        
-        labelGroup.animations = [flyRight, fadeFieldIn]
-        
-        labelGroup.beginTime = CACurrentMediaTime() + 0.6
-        authorLabel.layer.addAnimation(labelGroup, forKey: nil)
-        authorLabel.layer.opacity = 1
-        
-        labelGroup.beginTime = CACurrentMediaTime() + 0.7
-        dateLabel.layer.addAnimation(labelGroup, forKey: nil)
-        dateLabel.layer.opacity = 1
+        if !didLabelAnimatinons {
+            let titleGroup = CAAnimationGroup()
+            titleGroup.beginTime = CACurrentMediaTime() + 0.3
+            titleGroup.duration = 0.5
+            titleGroup.fillMode = kCAFillModeBackwards
+            titleGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            
+            let scaleDown = CABasicAnimation(keyPath: "transform.scale")
+            scaleDown.fromValue = 5.0
+            scaleDown.toValue = 1.0
+            
+            let fade = CABasicAnimation(keyPath: "opacity")
+            fade.fromValue = 0.0
+            fade.toValue = 1.0
+            
+            titleGroup.animations = [scaleDown, fade]
+            titleLabel.layer.addAnimation(titleGroup, forKey: nil)
+            titleLabel.layer.opacity = 1
+            
+            let labelGroup = CAAnimationGroup()
+            labelGroup.duration = 0.5
+            labelGroup.fillMode = kCAFillModeBackwards
+            
+            let flyRight = CABasicAnimation(keyPath: "position.x")
+            flyRight.fromValue = -view.bounds.size.width/2
+            flyRight.toValue = view.bounds.size.width/2
+            
+            let fadeFieldIn = CABasicAnimation(keyPath: "opacity")
+            fadeFieldIn.fromValue = 0.25
+            fadeFieldIn.toValue = 1.0
+            
+            labelGroup.animations = [flyRight, fadeFieldIn]
+            
+            labelGroup.beginTime = CACurrentMediaTime() + 0.6
+            authorLabel.layer.addAnimation(labelGroup, forKey: nil)
+            authorLabel.layer.opacity = 1
+            
+            labelGroup.beginTime = CACurrentMediaTime() + 0.7
+            dateLabel.layer.addAnimation(labelGroup, forKey: nil)
+            dateLabel.layer.opacity = 1
 
+            didLabelAnimatinons = true
+        }
     }
 }
 
 extension PostDetailViewController: WKNavigationDelegate {
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        labelAnimations()
         if webView.scrollView.contentSize.height == 0 {
             checkWebViewDidFinish()
         } else {
             updateWebview()
-            KVNProgress.dismiss()
-            labelAnimations()
         }
     }
 }
@@ -243,14 +265,15 @@ extension PostDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 {
             let percent: CGFloat = fabs(scrollView.contentOffset.y / (kHeaderViewHeight - navBarHeight))
-            println("percent \(percent)")
+           // println("percent \(percent)")
             blurViewContainer.alpha = percent * 3
         } else {
             blurViewContainer.alpha = 0
         }
-        if didLayoutSubviews {
+        if viewDidAppear {
             updateHeaderImageView()
         }
     }
 }
+
 

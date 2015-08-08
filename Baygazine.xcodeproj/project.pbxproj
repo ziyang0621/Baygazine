@@ -23,6 +23,7 @@
 		8574377B1B5EDD0400044811 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574377A1B5EDD0400044811 /* PostCell.xib */; };
 		857437821B5F058300044811 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437811B5F058300044811 /* PostDetailViewController.swift */; };
 		857437851B5F5DF900044811 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437841B5F5DF900044811 /* NewsListViewController.swift */; };
+		85C66ECD1B74119F0009007A /* ExpandingCellTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C66ECC1B74119F0009007A /* ExpandingCellTransition.swift */; };
 		85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E774041B5B40C7002CEB0E /* AppDelegate.swift */; };
 		85E7740A1B5B40C7002CEB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E774081B5B40C7002CEB0E /* Main.storyboard */; };
 		85E7740C1B5B40C7002CEB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E7740B1B5B40C7002CEB0E /* Images.xcassets */; };
@@ -58,6 +59,7 @@
 		8574377C1B5EE12E00044811 /* Baygazine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Baygazine-Bridging-Header.h"; sourceTree = "<group>"; };
 		857437811B5F058300044811 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		857437841B5F5DF900044811 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		85C66ECC1B74119F0009007A /* ExpandingCellTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingCellTransition.swift; sourceTree = "<group>"; };
 		85E773FF1B5B40C7002CEB0E /* Baygazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baygazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E774031B5B40C7002CEB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E774041B5B40C7002CEB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				85E774041B5B40C7002CEB0E /* AppDelegate.swift */,
 				857437741B5ECB6400044811 /* Model */,
 				857437751B5EDBAE00044811 /* View */,
+				85C66ECC1B74119F0009007A /* ExpandingCellTransition.swift */,
 				857437841B5F5DF900044811 /* NewsListViewController.swift */,
 				857437811B5F058300044811 /* PostDetailViewController.swift */,
 				8518DFEA1B62F2730078F56B /* AboutViewController.swift */,
@@ -352,6 +355,7 @@
 			files = (
 				8574372E1B5DA64300044811 /* SidebarViewController.swift in Sources */,
 				857437821B5F058300044811 /* PostDetailViewController.swift in Sources */,
+				85C66ECD1B74119F0009007A /* ExpandingCellTransition.swift in Sources */,
 				85486D6E1B72B4270077B482 /* MenuButton.swift in Sources */,
 				85E774051B5B40C7002CEB0E /* AppDelegate.swift in Sources */,
 				857437771B5EDBCB00044811 /* GradientView.swift in Sources */,

@@ -43,10 +43,11 @@ class SidebarViewController: UIViewController {
             closeMenuAnimated(false)
         }
     }
-    
+ 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewDidAppear = true
+        println("side bar vc did appear")
     }
     
     deinit {

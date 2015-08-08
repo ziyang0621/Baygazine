@@ -28,6 +28,8 @@ class NewsListViewController: UIViewController {
     var baseURL: String!
     weak var delegate: NewsListViewControllerDelegate?
     var menuButton: MenuButton!
+    var selectedIndexPath: NSIndexPath?
+    let transition = ExpandingCellTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,8 @@ class NewsListViewController: UIViewController {
         
         loadingInfoView.alpha = 0
         loadingIndicator.startAnimating()
+        
+        navigationController?.delegate = self
         
         populatePosts()
     }
@@ -189,10 +193,56 @@ extension NewsListViewController: UITableViewDataSource {
 
 extension NewsListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndexPath = indexPath
         let post = posts[indexPath.row]
         let postVC = UIStoryboard.postDetailViewController()
         postVC.post = post
         postVC.thumbnailImage = (tableView.cellForRowAtIndexPath(indexPath) as! PostCell).thumbnailImageView.image
-        navigationController?.showViewController(postVC, sender: self)
+        
+        
+        if let nav = navigationController {
+            println("new list has nav")
+        }
+        
+        println("presenting vc \(self.presentingViewController)")
+        
+        postVC.navigationController?.delegate = self
+        self.navigationController?.pushViewController(postVC, animated: true)
+        
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.preservesSuperviewLayoutMargins = false
+    }
+}
+
+extension NewsListViewController: ExpandingTransitionPresentingViewController {
+    func expandingTransitionTargetViewForTransition(transition: ExpandingCellTransition) -> UIView! {
+        if let indexPath = selectedIndexPath {
+            return tableView.cellForRowAtIndexPath(indexPath)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension NewsListViewController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if fromVC.isKindOfClass(AboutViewController) || toVC.isKindOfClass(AboutViewController) {
+            return nil
+        }
+        
+        if operation == UINavigationControllerOperation.Push {
+            transition.type = .Presenting
+            println("pushing")
+        } else {
+            transition.type = .Dismissing
+            println("popping")
+        }
+        
+        return transition
     }
 }
