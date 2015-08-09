@@ -36,13 +36,13 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as! MenuCell
         cell.backgroundColor = UIColor.clearColor()
-        if indexPath.row < 5 {
+        if indexPath.row < 6 {
             cell.menuText = kCategories[indexPath.row]
         } else {
             cell.menuText = "關於Baygazine!"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kExpandingCellTransitionDuration: NSTimeInterval = 0.6
+private let kExpandingCellTransitionDuration: NSTimeInterval = 0.7
 
 class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     enum TransitionType {
@@ -49,9 +49,6 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning, 
         targetContainer = UIView(frame: targetFrame)
         targetContainer.backgroundColor = UIColor.whiteColor()
         targetContainer.clipsToBounds = true
-        if targetSnapshot == nil {
-            println("emtpy target snap shot")
-        }
         targetContainer.addSubview(targetSnapshot)
         
         // create navigation bar snapshot
@@ -97,22 +94,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning, 
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         let containerView = transitionContext.containerView()
-        
-        if let fromVC = fromViewController as? UINavigationController {
-            println("is nav")
-            if fromVC.topViewController.isKindOfClass(NewsListViewController) {
-                println("is news list")
-            }
-        }
-        
-        if fromViewController.isKindOfClass(SidebarViewController) {
-            println("test side bar")
-        }
-        
-        if fromViewController.isKindOfClass(NewsListViewController) {
-            println("test news list")
-        }
-        
+    
         var foregroundViewController = toViewController
         var backgroundViewController = fromViewController
         
@@ -190,34 +172,6 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning, 
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
         })
     }
-    
-//    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        presentingController = presenting
-//        
-//        if let navController = presentingController as? UINavigationController {
-//            presentingController = navController.topViewController
-//        }
-//        
-//        if presentingController is ExpandingTransitionPresentingViewController {
-//            type = .Presenting
-//            return self
-//        }
-//        else {
-//            type = .None
-//            return nil
-//        }
-//    }
-//    
-//    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        if presentingController is ExpandingTransitionPresentingViewController {
-//            type = .Dismissing
-//            return self
-//        }
-//        else {
-//            type = .None
-//            return nil
-//        }
-//    }
     
 }
 

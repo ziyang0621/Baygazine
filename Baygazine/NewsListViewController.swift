@@ -199,13 +199,6 @@ extension NewsListViewController: UITableViewDelegate {
         postVC.post = post
         postVC.thumbnailImage = (tableView.cellForRowAtIndexPath(indexPath) as! PostCell).thumbnailImageView.image
         
-        
-        if let nav = navigationController {
-            println("new list has nav")
-        }
-        
-        println("presenting vc \(self.presentingViewController)")
-        
         postVC.navigationController?.delegate = self
         self.navigationController?.pushViewController(postVC, animated: true)
         

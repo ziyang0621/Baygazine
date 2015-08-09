@@ -42,10 +42,6 @@ class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        if let nav = navigationController {
-            println("has nav")
-        }
       
         let leftBarButton = UIBarButtonItem(image: UIImage(named: "IconClose"), style: .Plain, target: self, action: "close")
         navigationItem.leftBarButtonItem = leftBarButton
@@ -58,6 +54,8 @@ class PostDetailViewController: UIViewController {
         containerHeightLayoutContraint.constant = CGRectGetHeight(view.bounds)
         containerWidthLayoutContraint.constant = CGRectGetWidth(view.bounds)
         navBarHeight = CGRectGetHeight(navigationController!.navigationBar.frame)
+        
+        KVNProgress.showWithStatus("讀取中...", onView: navigationController?.view)
         
         loadArticle()
         
@@ -144,6 +142,7 @@ class PostDetailViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        println("did appear")
         viewDidAppear = true
     }
 
@@ -168,11 +167,10 @@ class PostDetailViewController: UIViewController {
     
     func updateWebview() {
         webViewContainerHeightLayoutContraint.constant = webView.scrollView.contentSize.height
-        
-        scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + navBarHeight + kBottomPadding + CGRectGetHeight(navigationController!.view.bounds)
+        scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + navBarHeight + kBottomPadding
         containerHeightLayoutContraint.constant = scrollView.contentSize.height
         
-        println("height :\(scrollView.contentSize.height) \(CGRectGetHeight(navigationController!.view.bounds))")
+        println("update web view")
         
         view.updateConstraints()
         UIView.animateWithDuration(1.0, animations: { () -> Void in
@@ -194,7 +192,7 @@ class PostDetailViewController: UIViewController {
     
     func checkWebViewDidFinish() {
         if webView.scrollView.contentSize.height == 0 {
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * 1.0))
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * 0.5))
             
             dispatch_after(time, dispatch_get_main_queue()) {
                 self.webView(self.webView, didFinishNavigation: nil)
@@ -252,11 +250,12 @@ class PostDetailViewController: UIViewController {
 
 extension PostDetailViewController: WKNavigationDelegate {
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        labelAnimations()
-        if webView.scrollView.contentSize.height == 0 {
+        if webView.scrollView.contentSize.height == 0  {
             checkWebViewDidFinish()
         } else {
+            KVNProgress.dismiss()
             updateWebview()
+            labelAnimations()
         }
     }
 }
@@ -265,7 +264,6 @@ extension PostDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 {
             let percent: CGFloat = fabs(scrollView.contentOffset.y / (kHeaderViewHeight - navBarHeight))
-           // println("percent \(percent)")
             blurViewContainer.alpha = percent * 3
         } else {
             blurViewContainer.alpha = 0

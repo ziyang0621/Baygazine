@@ -9,13 +9,14 @@
 import UIKit
 
 let kThemeColor = UIColor.colorWithRGBHex(0x0D72A8, alpha: 1.0)
-let kCategoryURLs = ["http://baygazine.com/category/life-style/?json=1",
+let kCategoryURLs = ["http://baygazine.com/?json=get_recent_posts",
+    "http://baygazine.com/category/life-style/?json=1",
     "http://baygazine.com/category/eat-and-drink/?json=1",
     "http://baygazine.com/category/news-and-politics/?json=1",
     "http://baygazine.com/category/column/?json=1",
     "http://baygazine.com/category/contribution/?json=1"]
-let kCategories = ["生活", "飲食", "新聞及政治", "專欄", "讀者投稿"]
-let kCategoryImageNames = ["LifeStyle", "Drink", "Political", "Column", "Reader", "About"]
+let kCategories = ["最新","生活", "飲食", "新聞及政治", "專欄", "讀者投稿"]
+let kCategoryImageNames = ["Recent", "LifeStyle", "Drink", "Political", "Column", "Reader", "About"]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -104,7 +105,7 @@ extension AppDelegate: MenuViewControllerDelegate {
         sidebarVC.closeMenuAnimated(true)
         var viewControllerIndex = 0
 
-        if (row < 5) {
+        if (row < 6) {
             viewControllerIndex = 0
             (mainViewControllers[0] as! NewsListViewController).baseURL = kCategoryURLs[row]
             (mainViewControllers[0] as! NewsListViewController).navigationItem.title = kCategories[row]
