@@ -55,11 +55,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-Baygazine/AFNetworking.framework'
   install_framework 'Pods-Baygazine/KVNProgress.framework'
   install_framework 'Pods-Baygazine/SwiftyJSON.framework'
+  install_framework 'Pods-Baygazine/hpple.framework'
   install_framework 'Pods-Baygazine/pop.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-Baygazine/AFNetworking.framework'
   install_framework 'Pods-Baygazine/KVNProgress.framework'
   install_framework 'Pods-Baygazine/SwiftyJSON.framework'
+  install_framework 'Pods-Baygazine/hpple.framework'
   install_framework 'Pods-Baygazine/pop.framework'
 fi

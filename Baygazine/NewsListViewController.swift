@@ -88,6 +88,9 @@ class NewsListViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        (appDelegate.window?.rootViewController as! SidebarViewController).enableHorizontalScrolling()
     }
     
     override func didReceiveMemoryWarning() {
@@ -173,11 +176,12 @@ extension NewsListViewController: UITableViewDataSource {
         
         cell.titleLabel.text = post.title
         if let thumbnailURL = post.thumbnailUrl {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
             cell.thumbnailImageView.addSubview(activityIndicator)
             activityIndicator.center = cell.thumbnailImageView.center
             activityIndicator.startAnimating()
             let request = NSURLRequest(URL: NSURL(string: thumbnailURL)!)
+            cell.thumbnailImageView.image = nil
             cell.thumbnailImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
                 (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
                 activityIndicator.removeFromSuperview()

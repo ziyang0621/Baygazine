@@ -173,6 +173,16 @@ class SidebarViewController: UIViewController {
         
         return rotationTransform
     }
+    
+    func enableHorizontalScrolling() {
+        scrollView.contentSize = CGSize(width: CGRectGetWidth(leftViewController.view.bounds) + CGRectGetWidth(mainViewController.view.bounds), height: CGRectGetHeight(scrollView.bounds))
+        scrollView.contentOffset = CGPoint(x: CGRectGetWidth(scrollView.frame), y: 0)
+    }
+    
+    func disableHorizontalScrolling() {
+        scrollView.contentSize = CGSize(width: CGRectGetWidth(view.bounds), height: CGRectGetHeight(scrollView.bounds))
+        scrollView.contentOffset = CGPoint(x: CGRectGetWidth(scrollView.frame), y: 0)
+    }
 }
 
 extension SidebarViewController: UIScrollViewDelegate {

@@ -10,9 +10,9 @@ import UIKit
 import KVNProgress
 import WebKit
 import pop
+import hpple
 
 private let kHeaderViewHeight: CGFloat = 300.0
-private let kBottomPadding: CGFloat = 100.0
 
 class PostDetailViewController: UIViewController {
 
@@ -28,7 +28,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var webViewContainer: UIView!
-    var webView: WKWebView!
+    var webView: UIWebView!
     var blurViewContainer: UIView!
     var post: Post?
     var thumbnailImage: UIImage?
@@ -39,6 +39,7 @@ class PostDetailViewController: UIViewController {
     var containerViewFrame: CGRect!
     var navBarHeight: CGFloat!
     var didLabelAnimatinons = false
+    var detailedImages = [PostDetailImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class PostDetailViewController: UIViewController {
         
         scrollView.delegate = self
         headerImageView.clipsToBounds = true
+        headerImageView.backgroundColor = UIColor.colorWithRGBHex(0x4A4A4A, alpha: 0.8)
         headerImageViewFrame = headerImageView.frame
         maximumStretchHeight = CGRectGetWidth(scrollView.bounds)
         containerViewFrame = containerView.frame
@@ -55,24 +57,30 @@ class PostDetailViewController: UIViewController {
         containerWidthLayoutContraint.constant = CGRectGetWidth(view.bounds)
         navBarHeight = CGRectGetHeight(navigationController!.navigationBar.frame)
         
-        KVNProgress.showWithStatus("讀取中...", onView: navigationController?.view)
-        
         loadArticle()
-        
+        labelAnimations()
+    }
+    
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        let size = change["new"]!.CGSizeValue()
+        updateWebview(size.height)
     }
     
     func close() {
-      //  dismissViewControllerAnimated(true, completion: nil)
         navigationController?.popViewControllerAnimated(true)
     }
     
     deinit {
         scrollView.delegate = nil
-        webView.navigationDelegate = nil
+        webView.scrollView.removeObserver(self, forKeyPath: "contentSize")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        (appDelegate.window?.rootViewController as! SidebarViewController).disableHorizontalScrolling()
     }
     
     func setupBlurView() {
@@ -97,10 +105,9 @@ class PostDetailViewController: UIViewController {
     }
     
     func setupWebview() {
-        webView = WKWebView(frame: CGRectZero)
+        webView = UIWebView(frame: CGRectZero)
         webViewContainer.addSubview(webView)
         webViewContainer.alpha = 0
-        webView.navigationDelegate = self
         webView.scrollView.scrollEnabled = false
         
         webView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -111,8 +118,35 @@ class PostDetailViewController: UIViewController {
         
         NSLayoutConstraint.activateConstraints([topConstraint, heightConstraint, leftConstraint, rightConstraint])
         
-        let styleString = "<style>iframe{width:100%} img{width:100%;pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:250%;padding:2% 2% 2% 2%}</style>"
-        webView.loadHTMLString(styleString + post!.content!, baseURL: nil)
+        webView.scrollView.addObserver(self, forKeyPath: "contentSize", options: .New, context: nil)
+        
+        var styleString = "<style>iframe{width:100%} img{pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:100%;padding:2% 2% 2% 2%}</style>"
+        
+        var finalString = post!.content!
+        let stringData = finalString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        let doc = TFHpple(HTMLData: stringData)
+        let nodes = doc.searchWithXPathQuery("//img")
+
+        var counter = 0
+        for element in nodes {
+            let element = element as! TFHppleElement
+            let postDetailedImage = PostDetailImage(element: element)
+            postDetailedImage.updateWidthAndHeightWithDeviceBounds(UIScreen.mainScreen().bounds)
+            
+            if let textRange = finalString.rangeOfString(postDetailedImage.raw!, options: .LiteralSearch, range: nil, locale: nil) {
+                finalString = finalString.stringByReplacingOccurrencesOfString(postDetailedImage.raw!, withString: postDetailedImage.newRaw!, options: .LiteralSearch, range: nil)
+            } else {
+                counter++
+                if counter == nodes.count {
+                    println("change style string")
+                    styleString = "<style>iframe{width:100%} img{width:90%;pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:100%;padding:2% 2% 2% 2%}</style>"
+                }
+            }
+        }
+        
+        println(finalString)
+        
+        webView.loadHTMLString(styleString + finalString, baseURL: nil)
     }
     
     func loadArticle() {
@@ -125,11 +159,26 @@ class PostDetailViewController: UIViewController {
         dateLabel.text = post!.createdDate!
         dateLabel.layer.opacity = 0
         
-        if let thumbnailImage = thumbnailImage {
-            headerImageView.image = thumbnailImage
+        if let imgURL = post?.thumbnailUrl {
+            if let thumbnailImage = thumbnailImage {
+                headerImageView.image = thumbnailImage
+            } else {
+                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+                headerImageView.addSubview(activityIndicator)
+                activityIndicator.center = CGPoint(x: CGRectGetMidX(view.bounds), y: CGRectGetMaxY(navigationController!.navigationBar.bounds) + 100)
+                activityIndicator.startAnimating()
+                let request = NSURLRequest(URL: NSURL(string: imgURL)!)
+                headerImageView.image = nil
+                headerImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
+                    (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
+                    activityIndicator.removeFromSuperview()
+                    self.headerImageView.image = image
+                }, failure: nil)
+            }
         } else {
             headerImageView.image = UIColor.imageWithColor(kThemeColor)
         }
+        
         setupBlurView()
         
         setupWebview()
@@ -137,12 +186,10 @@ class PostDetailViewController: UIViewController {
   
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        println("did layout")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        println("did appear")
         viewDidAppear = true
     }
 
@@ -165,12 +212,10 @@ class PostDetailViewController: UIViewController {
         }
     }
     
-    func updateWebview() {
-        webViewContainerHeightLayoutContraint.constant = webView.scrollView.contentSize.height
-        scrollView.contentSize.height = webView.scrollView.contentSize.height + kHeaderViewHeight + navBarHeight + kBottomPadding
+    func updateWebview(height: CGFloat) {
+        webViewContainerHeightLayoutContraint.constant = height
+        scrollView.contentSize.height = height + kHeaderViewHeight + CGRectGetHeight(navigationController!.view.bounds)
         containerHeightLayoutContraint.constant = scrollView.contentSize.height
-        
-        println("update web view")
         
         view.updateConstraints()
         UIView.animateWithDuration(1.0, animations: { () -> Void in
@@ -181,23 +226,13 @@ class PostDetailViewController: UIViewController {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ (context) -> Void in
-           self.updateWebview()
+           self.updateWebview(self.webView.scrollView.contentSize.height)
            self.containerWidthLayoutContraint.constant = CGRectGetWidth(self.view.bounds)
             self.view.updateConstraints()
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 self.view.layoutIfNeeded()
             })
         }, completion: nil)
-    }
-    
-    func checkWebViewDidFinish() {
-        if webView.scrollView.contentSize.height == 0 {
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * 0.5))
-            
-            dispatch_after(time, dispatch_get_main_queue()) {
-                self.webView(self.webView, didFinishNavigation: nil)
-            }
-        }
     }
     
     func labelAnimations() {
@@ -244,18 +279,6 @@ class PostDetailViewController: UIViewController {
             dateLabel.layer.opacity = 1
 
             didLabelAnimatinons = true
-        }
-    }
-}
-
-extension PostDetailViewController: WKNavigationDelegate {
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        if webView.scrollView.contentSize.height == 0  {
-            checkWebViewDidFinish()
-        } else {
-            KVNProgress.dismiss()
-            updateWebview()
-            labelAnimations()
         }
     }
 }

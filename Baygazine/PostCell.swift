@@ -19,6 +19,7 @@ class PostCell: UITableViewCell {
         // Initialization code
         
         thumbnailImageView.clipsToBounds = true
+        backgroundColor = UIColor.colorWithRGBHex(0x4A4A4A, alpha: 0.8)
         selectionStyle = .None
     }
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		36822E0711ABEB28BA436630 /* Pods_Baygazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66A2766D4FEFF8076211B07 /* Pods_Baygazine.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8518DFEB1B62F2730078F56B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8518DFEA1B62F2730078F56B /* AboutViewController.swift */; };
+		853BC8C71B80442200C18271 /* PostDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853BC8C61B80442200C18271 /* PostDetailImage.swift */; };
 		85486D6E1B72B4270077B482 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85486D6D1B72B4270077B482 /* MenuButton.swift */; };
 		8574372E1B5DA64300044811 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574372D1B5DA64300044811 /* SidebarViewController.swift */; };
 		857437321B5DB29800044811 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857437311B5DB29800044811 /* MenuViewController.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		4A59A422B96A2F047B8F1A18 /* Pods-Baygazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baygazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Baygazine/Pods-Baygazine.debug.xcconfig"; sourceTree = "<group>"; };
 		8518DFEA1B62F2730078F56B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		853BC8C61B80442200C18271 /* PostDetailImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailImage.swift; sourceTree = "<group>"; };
 		85486D6D1B72B4270077B482 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		8574372D1B5DA64300044811 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		857437311B5DB29800044811 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				8574376E1B5EC25600044811 /* Post.swift */,
 				857437701B5ECAE300044811 /* Attachment.swift */,
 				857437721B5ECB1800044811 /* Author.swift */,
+				853BC8C61B80442200C18271 /* PostDetailImage.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 		85E773F71B5B40C7002CEB0E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Ziyang Tan";
 				TargetAttributes = {
@@ -365,6 +369,7 @@
 				857437711B5ECAE300044811 /* Attachment.swift in Sources */,
 				857437321B5DB29800044811 /* MenuViewController.swift in Sources */,
 				857437791B5EDC1300044811 /* PostCell.swift in Sources */,
+				853BC8C71B80442200C18271 /* PostDetailImage.swift in Sources */,
 				8574376F1B5EC25600044811 /* Post.swift in Sources */,
 				8518DFEB1B62F2730078F56B /* AboutViewController.swift in Sources */,
 				857437851B5F5DF900044811 /* NewsListViewController.swift in Sources */,
