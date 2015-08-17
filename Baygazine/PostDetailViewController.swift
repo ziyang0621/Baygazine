@@ -10,7 +10,6 @@ import UIKit
 import KVNProgress
 import WebKit
 import pop
-import hpple
 
 private let kHeaderViewHeight: CGFloat = 300.0
 
@@ -39,7 +38,6 @@ class PostDetailViewController: UIViewController {
     var containerViewFrame: CGRect!
     var navBarHeight: CGFloat!
     var didLabelAnimatinons = false
-    var detailedImages = [PostDetailImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,7 +159,7 @@ class PostDetailViewController: UIViewController {
             }
         }
         
-        let regex = NSRegularExpression(pattern: "<style.*?<\\/style>" , options: .DotMatchesLineSeparators, error: nil)
+       let regex = NSRegularExpression(pattern: "<style.*?<\\/style>" , options: .DotMatchesLineSeparators, error: nil)
         if let regex = regex {
             finalString = regex.stringByReplacingMatchesInString(finalString, options: nil, range: NSMakeRange(0, count(finalString)), withTemplate: "")
         }

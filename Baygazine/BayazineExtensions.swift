@@ -41,6 +41,18 @@ extension String {
             as! [NSTextCheckingResult]
         return map(results) { nsString.substringWithRange($0.rangeAtIndex(1))}
     }
+    
+    static func findContentBetween(inputString: String, start: String, end: String) -> [String] {
+        var result = [String]()
+        let firstArray = inputString.componentsSeparatedByString(start)
+        for firstArrayItem in firstArray {
+            let secondArray = firstArrayItem.componentsSeparatedByString(end)
+            for secondArrayItem in secondArray {
+                result.append(start + secondArrayItem + end)
+            }
+        }
+        return result
+    }
 }
 
 extension UIColor {

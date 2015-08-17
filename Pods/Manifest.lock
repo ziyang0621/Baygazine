@@ -20,21 +20,18 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - hpple (0.2.0)
   - KVNProgress (2.2.1)
   - pop (1.0.7)
   - SwiftyJSON (2.2.1)
 
 DEPENDENCIES:
   - AFNetworking
-  - hpple
   - KVNProgress
   - pop
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
   KVNProgress: 7001d2d16a2755cee5599e8e485befe056f2197b
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33

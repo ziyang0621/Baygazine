@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>hpple.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,17 +32,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15A814BA88EE108B525091E01418B47A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3DA374BB5346C86BB9E37D7D8A3F9705</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73B9527F4F7DBBC30E63C15ECE8B1791</key>
+		<key>781F111981A7440DE6E29CDFC85EDF02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79EEB9E639F50A81E24FB6E4D6A9B0EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D635F027F0A6FD04B98B790907265430</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DA8E24B7849056E7C654280299EA3982</key>
+		<key>BD504C776E507562328F815231C53ECF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

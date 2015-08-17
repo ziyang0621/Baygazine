@@ -11,6 +11,4 @@ pod 'pop'
 
 pod 'SwiftyJSON'
 
-pod 'hpple'
-
 end
