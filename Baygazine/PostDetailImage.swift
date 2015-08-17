@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import hpple
 
 class PostDetailImage: NSObject {
     var width: CGFloat? {
@@ -25,48 +24,42 @@ class PostDetailImage: NSObject {
     var raw: String?
     var newRaw: String?
     
-    init(element: TFHppleElement) {
+    init(fullRaw: String) {
         super.init()
         
-        let attributes =  element.attributes
-        src = attributes["src"] as? String
-        raw = element.raw
-        var textRange = raw!.rangeOfString(" />", options: .LiteralSearch, range: nil, locale: nil)
-        if textRange == nil {
-            raw = raw!.stringByReplacingOccurrencesOfString("/>", withString: " />", options: .LiteralSearch, range: nil)
-        }
-        
-       // let stringData = raw!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-//        let attributedOptions : [String: AnyObject] = [
-//            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-//            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding,
-//        ]
+        raw = fullRaw
         
         generateInfo()
     }
     
     private func generateInfo() {
-        let fullMatch = String.matchesForRegexInTextFullMatch("\\?resize=\\d+\\%2C\\d+", text: src)
-        
-        if fullMatch.count > 0 {
+        let srcMatch = String.matchesForRegexInTextCaptureGroup("src=\"(.+?)\"", text: raw)
+        if srcMatch.count > 0 {
+            src = srcMatch.first
             
-            newSrc = src!.stringByReplacingOccurrencesOfString(fullMatch.first!, withString: "", options: .LiteralSearch, range: nil)
+            let resizeMatch = String.matchesForRegexInTextFullMatch("\\?resize=\\d+\\%2C\\d+", text: src)
             
-            let widthCaptureGroup = String.matchesForRegexInTextCaptureGroup("\\?resize=(.*)%2C", text: fullMatch.first)
-            
-            if widthCaptureGroup.count > 0 {
-                if let widthNum = NSNumberFormatter().numberFromString(widthCaptureGroup.first!) {
-                    width = CGFloat(widthNum)
+            if resizeMatch.count > 0 {
+                
+                newSrc = src!.stringByReplacingOccurrencesOfString(resizeMatch.first!, withString: "", options: .LiteralSearch, range: nil)
+                
+                let widthCaptureGroup = String.matchesForRegexInTextCaptureGroup("\\?resize=(.*)%2C", text: resizeMatch.first)
+                
+                if widthCaptureGroup.count > 0 {
+                    if let widthNum = NSNumberFormatter().numberFromString(widthCaptureGroup.first!) {
+                        width = CGFloat(widthNum)
+                    }
+                }
+                
+                let heightCaptureGroup = String.matchesForRegexInTextCaptureGroup("%2C(.*)", text: resizeMatch.first)
+                
+                if heightCaptureGroup.count > 0 {
+                    if let heightNum = NSNumberFormatter().numberFromString(heightCaptureGroup.first!) {
+                        height = CGFloat(heightNum)
+                    }
                 }
             }
-            
-             let heightCaptureGroup = String.matchesForRegexInTextCaptureGroup("%2C(.*)", text: fullMatch.first)
-            
-            if heightCaptureGroup.count > 0 {
-                if let heightNum = NSNumberFormatter().numberFromString(heightCaptureGroup.first!) {
-                    height = CGFloat(heightNum)
-                }
-            }
+
         }
     }
     
@@ -83,12 +76,10 @@ class PostDetailImage: NSObject {
     func updateWidthAndHeightWithDeviceBounds(theBounds: CGRect) {
         let maxWidth = theBounds.size.width * 0.9
         if let theWidth = width {
-//            if theWidth > maxWidth {
-                if let theHeight = height {
-                    height = maxWidth / theWidth * theHeight
-                }
-                width = maxWidth
-//            }
+            if let theHeight = height {
+                height = maxWidth / theWidth * theHeight
+            }
+            width = maxWidth
         }
     }
 }

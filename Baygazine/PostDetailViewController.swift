@@ -48,9 +48,6 @@ class PostDetailViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftBarButton
         
         scrollView.delegate = self
-        headerImageView.clipsToBounds = true
-        headerImageView.backgroundColor = UIColor.colorWithRGBHex(0x4A4A4A, alpha: 0.8)
-        headerImageViewFrame = headerImageView.frame
         maximumStretchHeight = CGRectGetWidth(scrollView.bounds)
         containerViewFrame = containerView.frame
         containerHeightLayoutContraint.constant = CGRectGetHeight(view.bounds)
@@ -81,6 +78,32 @@ class PostDetailViewController: UIViewController {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         (appDelegate.window?.rootViewController as! SidebarViewController).disableHorizontalScrolling()
+    }
+    
+    func setupHeaderImageView() {
+        headerImageView.clipsToBounds = true
+        headerImageView.backgroundColor = UIColor.colorWithRGBHex(0x4A4A4A, alpha: 0.8)
+        headerImageViewFrame = headerImageView.frame
+
+        if let imgURL = post?.thumbnailUrl {
+            if let thumbnailImage = thumbnailImage {
+                headerImageView.image = thumbnailImage
+            } else {
+                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+                headerImageView.addSubview(activityIndicator)
+                activityIndicator.center = CGPoint(x: CGRectGetMidX(view.bounds), y: CGRectGetMaxY(navigationController!.navigationBar.bounds) + 100)
+                activityIndicator.startAnimating()
+                let request = NSURLRequest(URL: NSURL(string: imgURL)!)
+                headerImageView.image = nil
+                headerImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
+                    (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
+                    activityIndicator.removeFromSuperview()
+                    self.headerImageView.image = image
+                    }, failure: nil)
+            }
+        } else {
+            headerImageView.image = UIColor.imageWithColor(kThemeColor)
+        }
     }
     
     func setupBlurView() {
@@ -123,28 +146,25 @@ class PostDetailViewController: UIViewController {
         var styleString = "<style>iframe{width:100%} img{pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:100%;padding:2% 2% 2% 2%}</style>"
         
         var finalString = post!.content!
-        let stringData = finalString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        let doc = TFHpple(HTMLData: stringData)
-        let nodes = doc.searchWithXPathQuery("//img")
-
-        var counter = 0
-        for element in nodes {
-            let element = element as! TFHppleElement
-            let postDetailedImage = PostDetailImage(element: element)
-            postDetailedImage.updateWidthAndHeightWithDeviceBounds(UIScreen.mainScreen().bounds)
-            
-            if let textRange = finalString.rangeOfString(postDetailedImage.raw!, options: .LiteralSearch, range: nil, locale: nil) {
-                finalString = finalString.stringByReplacingOccurrencesOfString(postDetailedImage.raw!, withString: postDetailedImage.newRaw!, options: .LiteralSearch, range: nil)
-            } else {
-                counter++
-                if counter == nodes.count {
-                    println("change style string")
-                    styleString = "<style>iframe{width:100%} img{width:90%;pointer-events:none;cursor:default;border:1% solid;border-radius:5%;margin:1% 1% 1% 1%} body{font-size:100%;padding:2% 2% 2% 2%}</style>"
+        
+        let matchString = String.matchesForRegexInTextCaptureGroup("(<img .+? \\/>)", text: finalString)
+        for match in matchString {
+            let detailedImage = PostDetailImage(fullRaw: match)
+            detailedImage.updateWidthAndHeightWithDeviceBounds(UIScreen.mainScreen().bounds)
+    
+            if let raw = detailedImage.raw {
+                if let textRange = finalString.rangeOfString(raw, options: .LiteralSearch, range: nil, locale: nil) {
+                    if let newRaw = detailedImage.newRaw {
+                         finalString = finalString.stringByReplacingOccurrencesOfString(raw, withString: newRaw, options: .LiteralSearch, range: nil)
+                    }
                 }
             }
         }
         
-        println(finalString)
+        let regex = NSRegularExpression(pattern: "<style.*?<\\/style>" , options: .DotMatchesLineSeparators, error: nil)
+        if let regex = regex {
+            finalString = regex.stringByReplacingMatchesInString(finalString, options: nil, range: NSMakeRange(0, count(finalString)), withTemplate: "")
+        }
         
         webView.loadHTMLString(styleString + finalString, baseURL: nil)
     }
@@ -159,25 +179,7 @@ class PostDetailViewController: UIViewController {
         dateLabel.text = post!.createdDate!
         dateLabel.layer.opacity = 0
         
-        if let imgURL = post?.thumbnailUrl {
-            if let thumbnailImage = thumbnailImage {
-                headerImageView.image = thumbnailImage
-            } else {
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-                headerImageView.addSubview(activityIndicator)
-                activityIndicator.center = CGPoint(x: CGRectGetMidX(view.bounds), y: CGRectGetMaxY(navigationController!.navigationBar.bounds) + 100)
-                activityIndicator.startAnimating()
-                let request = NSURLRequest(URL: NSURL(string: imgURL)!)
-                headerImageView.image = nil
-                headerImageView.setImageWithURLRequest(request, placeholderImage: nil, success: {
-                    (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
-                    activityIndicator.removeFromSuperview()
-                    self.headerImageView.image = image
-                }, failure: nil)
-            }
-        } else {
-            headerImageView.image = UIColor.imageWithColor(kThemeColor)
-        }
+        setupHeaderImageView()
         
         setupBlurView()
         
@@ -222,17 +224,6 @@ class PostDetailViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.webViewContainer.alpha = 1
         })
-    }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ (context) -> Void in
-           self.updateWebview(self.webView.scrollView.contentSize.height)
-           self.containerWidthLayoutContraint.constant = CGRectGetWidth(self.view.bounds)
-            self.view.updateConstraints()
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
-                self.view.layoutIfNeeded()
-            })
-        }, completion: nil)
     }
     
     func labelAnimations() {

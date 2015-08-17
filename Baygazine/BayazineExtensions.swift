@@ -23,7 +23,7 @@ extension String {
     static func matchesForRegexInTextFullMatch(regex: String!, text: String!) -> [String] {
         
         let regex = NSRegularExpression(pattern: regex,
-            options: nil, error: nil)!
+            options: .DotMatchesLineSeparators, error: nil)!
         let nsString = text as NSString
         let results = regex.matchesInString(text,
             options: nil, range: NSMakeRange(0, nsString.length))
@@ -34,7 +34,7 @@ extension String {
     static func matchesForRegexInTextCaptureGroup(regex: String!, text: String!) -> [String] {
         
         let regex = NSRegularExpression(pattern: regex,
-            options: nil, error: nil)!
+            options: .DotMatchesLineSeparators, error: nil)!
         let nsString = text as NSString
         let results = regex.matchesInString(text,
             options: nil, range: NSMakeRange(0, nsString.length))
